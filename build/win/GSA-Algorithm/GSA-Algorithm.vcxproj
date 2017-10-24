@@ -23,7 +23,7 @@
     <ClCompile Include="..\..\..\src\Probleme.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\Problem.h" />
+    <ClInclude Include="..\..\..\include\Probleme.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
