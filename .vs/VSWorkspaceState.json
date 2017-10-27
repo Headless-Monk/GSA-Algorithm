@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\build",
+    "\\build\\win",
+    "\\build\\win\\GSA-Algorithm",
+    "\\include",
+    "\\src"
   ],
-  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }
