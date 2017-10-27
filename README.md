@@ -25,7 +25,7 @@ Rendez vous dans l'onglet <b>Issues</b> sur GitHub. Pensez à bien définir la p
 
 ### Git et Visual Studio 2017 ###
 #### Début ####
-Pour récuperer le projet une première fois sur Visual Studio 2017, rendez vous dans l'onglet <b>Team Explorer</b> en bas du panneau de gauche sur Visual Studio, cliquez sur <b>Cloner</b>, et saisissez l'URL suivante pour le dépôt : https://github.com/Olivier-Delierre/ABC-Algorithm.git <br>
+Pour récuperer le projet une première fois sur Visual Studio 2017, rendez vous dans l'onglet <b>Team Explorer</b> en bas du panneau de gauche sur Visual Studio, cliquez sur <b>Cloner</b>, et saisissez l'URL suivante pour le dépôt : https://github.com/Agudolive/GSA-Algorithm.git <br>
 Retournez ensuite dans l'onglet <b>Team Explorer</b> puis double-cliquez sur le nom du dépôt (ABC-Algorithm), cliquez sur <b>Branches</b>, déroulez <b>remotes/origin</b> et double-cliquez sur <b>dev</b>.<br>
 Finalement, cliquez sur la maison dans le panneau de <b>Team Explorer</b>, puis double-cliquez sur <b>ABC-Algorithm</b> sous la catégorie <b>Solutions</b>.
 
