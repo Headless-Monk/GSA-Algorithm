@@ -1,6 +1,5 @@
 #include "MyAlgorithm.h"
 
-
 MyAlgorithm::MyAlgorithm(const Problem& pbm, const SetUpParams& setup):
         _pbm{pbm}, _setup{setup}
 {}
@@ -13,17 +12,17 @@ void MyAlgorithm::evolution(int iter)
 {
     if(iter > 0)
     {
-        /* évaluation des individus */
+        /* Ã©valuation des individus */
         spaceBound();
         evaluate(); //call for evaluation of each objective function (Solution::fitness)
 
         if(/*minimisation*/)
         {
-            //cherche le minimum de l'itération
+            //cherche le minimum de l'itï¿½ration
         }
         else if(/*maximisation*/)
         {
-            //cherche le maximum de l'itération
+            //cherche le maximum de l'itï¿½ration
         }
 
         //cherche si meilleur que best_cost
@@ -31,7 +30,7 @@ void MyAlgorithm::evolution(int iter)
 
 
 
-        /* évolution vers nouvelle génération */
+        /* ï¿½volution vers nouvelle gï¿½nï¿½ration */
         for(/*each solution*/)
             Solution.mass_calculation();
 

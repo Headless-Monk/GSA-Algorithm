@@ -1,7 +1,6 @@
 #ifndef MYALGORITHM_H
 #define MYALGORITHM_H
 
-#include "Particle.h"
 
 #include <vector>
 #include <ostream>
@@ -29,6 +28,7 @@ public:
 	const SetUpParams& setup() const;
 	void initialize(); //random position for each solution + velocity=0
 	void initProblem(); //switch init upper/lower limit and dimension
+
 
 	// creates an array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
 	void evaluate();

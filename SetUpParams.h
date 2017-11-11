@@ -14,7 +14,8 @@ private:
 	unsigned int   _solution_size;	        // size of each particle
 
 public:
-	SetUpParams();
+	SetUpParams(unsigned int runs, unsigned int steps,
+							unsigned int pop_size, unsigned int sol_size);
 	~SetUpParams();
 
 	//friend std::ostream& operator<< (std::ostream& os, const SetUpParams& setup);
