@@ -13,17 +13,17 @@ void MyAlgorithm::evolution(int iter)
     if(iter > 0)
     {
         /* évaluation des individus */
-        spaceBound();
-        evaluate(); //call for evaluation of each objective function (Solution::fitness)
+        //spaceBound();
+        //evaluate(); call for evaluation of each objective function (Solution::fitness)
 
-        if(/*minimisation*/)
+        /*if(minimisation)
         {
-            //cherche le minimum de l'it�ration
+            cherche le minimum de l'it�ration
         }
-        else if(/*maximisation*/)
+        else if(maximisation)
         {
-            //cherche le maximum de l'it�ration
-        }
+            cherche le maximum de l'it�ration
+        } */
 
         //cherche si meilleur que best_cost
         //calcule la nouvelle moyenne dans average_cost
@@ -31,8 +31,8 @@ void MyAlgorithm::evolution(int iter)
 
 
         /* �volution vers nouvelle g�n�ration */
-        for(/*each solution*/)
-            Solution.mass_calculation();
+        /*for(each solution)
+            Solution.mass_calculation();*/
 
 
 

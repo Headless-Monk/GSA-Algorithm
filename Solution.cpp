@@ -12,8 +12,8 @@ Solution::~Solution()
 }
 
 
-fitness()
+double Solution::fitness()
 {
-switch(_pbm.num())
-    case 1 : rosen
+  /*switch(_pbm.num())
+    case 1 : rosen*/
 }
