@@ -1,10 +1,11 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
 
+class Direction;
 class Problem //benchmark
 {
 public:
-	Problem(int num, int lower, int upper, int direction, int dimension);
+	Problem(int num);
 	~Problem();
 
 	//friend ostream& operator<< (ostream& os, const Problem& pbm);
@@ -17,7 +18,7 @@ public:
 
 
 	Direction _direction() const; //Maximize=0 or Minimize=1
-	int _dimension() const;
+	int r_dimension() const;
 	double _LowerLimit, _UpperLimit;
 
 private:
