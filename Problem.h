@@ -2,7 +2,7 @@
 #define PROBLEM_H
 
 class Direction;
-class Problem //benchmark
+class Problem // boundaries and dimension of search space
 {
 public:
 	Problem(int num);
@@ -17,14 +17,17 @@ public:
 
 
 
-	Direction _direction() const; //Maximize=0 or Minimize=1
-	int r_dimension() const;
-	double _LowerLimit, _UpperLimit;
+	//Direction _direction() const; //Maximize=0 or Minimize=1
+	//int r_dimension() const;
+
 
 private:
-
-	int _dimension;
 	int _num_pbm;
+
+	int _direction;	//Maximize=0 or Minimize=1
+	double _LowerLimit, _UpperLimit;
+	int _dimension;
+
 };
 
 #endif

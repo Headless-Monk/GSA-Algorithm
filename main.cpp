@@ -5,14 +5,19 @@
 using std::cout;
 using std::endl;
 
+void testSetUpParam()
+{
+  SetUpParams params{};
+  cout << params << endl;
+  params.edit_params();
+  cout << endl << params << endl;
+}
+
 int main()
 {
-    SetUpParams params{};
-    cout << params << endl;
-    params.edit_params();
-    cout << endl << params << endl;
+  testSetUpParam();
 
 
 
-    return 0;
+  return 0;
 }
