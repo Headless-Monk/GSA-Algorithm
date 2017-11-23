@@ -23,7 +23,7 @@ public:
 	friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
 	friend std::istream& operator>> (std::istream& is, Solution& sol);
 
-	const Problem& get_pbm() const;
+
 
 	//Solution& operator=  (const Solution& sol);
 	//bool operator== (const Solution& sol) const;
@@ -31,12 +31,23 @@ public:
 
 	void initialize();
 	double fitness();
+	void mass_calculation();
+	unsigned int size() const;
+	double& position(const int index); //retournera une position du tableau _solution
+	void  position(const int index, const double value);
+
+
+
+	void add_solution(double sol);
+	void delete_solution();
 
 	double get_current_fitness() const;
 	double get_velocity() const;
 	double get_acceleration() const;
 	double get_mass() const;
 	point get_position() const;
+	const Problem& get_pbm() const;
+	std::vector<double>& get_solution();
 
 	void set_current_fitness(double fit);
 	void set_velocity(double velocity);
@@ -45,19 +56,6 @@ public:
 	void set_position(point pos);
 	void set_position_X(int x);
 	void set_position_Y(int y);
-
-	void mass_calculation();
-
-	unsigned int size() const;
-
-	std::vector<double>& get_solution();
-
-	double& position(const int index); //retournera une position du tableau _solution
-	void  position(const int index, const double value);
-
-	void add_solution(double sol);
-	void delete_solution();
-
 
 private:
     double _velocity;
