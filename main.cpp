@@ -40,13 +40,16 @@ void testSolution()
     Problem prob{1};
     Solution sol_A{prob};
     cout << sol_A;
+    cout << endl;
+    cin >> sol_A;
+    cout << sol_A;
 }
 
 int main()
 {
     //testSetUpParam();
     //testProblem();
-    testSolution();
+    //testSolution();
 
   return 0;
 }

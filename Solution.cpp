@@ -98,6 +98,16 @@ void Solution::set_position(point pos)
     _position = pos;
 }
 
+void Solution::set_position_X(int x)
+{
+    _position.x = x;
+}
+
+void Solution::set_position_Y(int y)
+{
+    _position.y = y;
+}
+
 /* OPERATEURS DE FLUX */
 
 std::ostream& operator<<(std::ostream& os, const Solution& sol)
@@ -108,6 +118,58 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << "Position         : " << sol.get_position().x << "," << sol.get_position().y << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness();
  }
+
+std::istream&  operator>>(std::istream& is, Solution& sol)
+{
+    cout << "Entrez les valeurs sous la forme (velocite;acceleration;masse;position_x;position_y;fitness)" << endl;
+
+    char c;
+    double tmp;
+    is >> c;
+
+    is >> tmp;
+        sol.set_velocity(tmp);
+    is >> c;
+
+    is >> tmp;
+        sol.set_acceleration(tmp);
+    is >> c;
+
+    is >> tmp;
+        sol.set_mass(tmp);
+    is >> c;
+
+    is >> tmp;
+        sol.set_position_X((int)tmp);
+    is >> c;
+
+    is >> tmp;
+        sol.set_position_Y((int)tmp);
+    is >> c;
+
+    is >> tmp;
+        sol.set_current_fitness(tmp);
+    is >> c;
+}
+
+std::vector<double>& Solution::get_solution()
+{
+    return _solution;
+}
+
+void Solution::add_solution(double sol)
+{
+    _solution.push_back(sol);
+}
+
+void Solution::delete_solution()
+{
+    _solution.pop_back();
+}
+
+
+
+
 
 
 

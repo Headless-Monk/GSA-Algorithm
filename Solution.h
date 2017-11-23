@@ -21,7 +21,7 @@ public:
 	~Solution();
 
 	friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
-	//friend std::istream& operator>> (std::istream& is, Solution& sol);
+	friend std::istream& operator>> (std::istream& is, Solution& sol);
 
 	const Problem& get_pbm() const;
 
@@ -43,15 +43,20 @@ public:
 	void set_acceleration(double acceleration);
 	void set_mass(double acceleration);
 	void set_position(point pos);
+	void set_position_X(int x);
+	void set_position_Y(int y);
 
 	void mass_calculation();
 
 	unsigned int size() const;
 
-	std::vector<double>& solution();
+	std::vector<double>& get_solution();
 
 	double& position(const int index); //retournera une position du tableau _solution
 	void  position(const int index, const double value);
+
+	void add_solution(double sol);
+	void delete_solution();
 
 
 private:
@@ -59,7 +64,7 @@ private:
     double _acceleration;
     double _mass;
     point _position;
-	//std::vector<double> _solution;
+	std::vector<double> _solution;
 	double _current_fitness;
 	const Problem& _pbm;
 };
