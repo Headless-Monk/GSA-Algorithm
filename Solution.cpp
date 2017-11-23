@@ -66,7 +66,7 @@ double Solution::fitness()
         ( pow(sin(pow(1,2)-pow(2,2)),2)  - 0.5 ) / (pow(1+0.001 * (pow(1,2)+pow(2,2)),2));
         break;
 
-      case 6 : //Weierstrass
+      case 6 : //Weierstrass -> à corriger
         for(int i=0; i<=_pbm.get_dimension(); i++)
         {
             sum += pow(0.7, i) * cos ( pow(0.025 * i , i) * M_PI * i)
