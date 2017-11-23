@@ -20,10 +20,10 @@ public:
 	Solution(const Solution& sol);
 	~Solution();
 
-	//friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
+	friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
 	//friend std::istream& operator>> (std::istream& is, Solution& sol);
 
-	const Problem& pbm() const;
+	const Problem& get_pbm() const;
 
 	//Solution& operator=  (const Solution& sol);
 	//bool operator== (const Solution& sol) const;
@@ -31,7 +31,19 @@ public:
 
 	void initialize();
 	double fitness();
-	double get_fitness();
+
+	double get_current_fitness() const;
+	double get_velocity() const;
+	double get_acceleration() const;
+	double get_mass() const;
+	point get_position() const;
+
+	void set_current_fitness(double fit);
+	void set_velocity(double velocity);
+	void set_acceleration(double acceleration);
+	void set_mass(double acceleration);
+	void set_position(point pos);
+
 	void mass_calculation();
 
 	unsigned int size() const;
@@ -47,8 +59,6 @@ private:
     double _acceleration;
     double _mass;
     point _position;
-
-
 	//std::vector<double> _solution;
 	double _current_fitness;
 	const Problem& _pbm;

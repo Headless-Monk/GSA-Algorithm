@@ -2,6 +2,7 @@
 
 #include "SetUpParams.h"
 #include "Problem.h"
+#include "Solution.h"
 
 using std::cout;
 using std::endl;
@@ -34,10 +35,18 @@ void testProblem()
     cout << test;
 }
 
+void testSolution()
+{
+    Problem prob{1};
+    Solution sol_A{prob};
+    cout << sol_A;
+}
+
 int main()
 {
     //testSetUpParam();
     //testProblem();
+    testSolution();
 
   return 0;
 }

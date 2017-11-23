@@ -5,10 +5,8 @@ Solution::Solution(const Problem& pbm):
         _pbm{pbm}
 {}
 
-
 Solution::~Solution()
 {}
-
 
 double Solution::fitness()
 {
@@ -40,3 +38,79 @@ double Solution::fitness()
         break;
     }
 }
+
+/* GETTER */
+
+const Problem& Solution::get_pbm() const
+{
+    return _pbm;
+}
+
+double Solution::get_current_fitness() const
+{
+    return _current_fitness;
+}
+
+double Solution::get_velocity() const
+{
+    return _velocity;
+}
+
+double Solution::get_acceleration() const
+{
+    return _acceleration;
+}
+
+double Solution::get_mass() const
+{
+    return _mass;
+}
+
+point Solution::get_position() const
+{
+    return _position;
+}
+
+/* SETTER */
+
+void Solution::set_current_fitness(double fit)
+{
+    _current_fitness = fit;
+}
+
+void Solution::set_velocity(double velocity)
+{
+    _velocity = velocity;
+}
+
+void Solution::set_acceleration(double acceleration)
+{
+    _acceleration = acceleration;
+}
+
+void Solution::set_mass(double mass)
+{
+    _mass = mass;
+}
+
+void Solution::set_position(point pos)
+{
+    _position = pos;
+}
+
+/* OPERATEURS DE FLUX */
+
+std::ostream& operator<<(std::ostream& os, const Solution& sol)
+{
+    os << "Velocite         : " << sol.get_velocity() << endl;
+    os << "Acceleration     : " << sol.get_acceleration() << endl;
+    os << "Masse            : " << sol.get_mass() << endl;
+    os << "Position         : " << sol.get_position().x << "," << sol.get_position().y << endl;
+    os << "Fitness actuelle : " << sol.get_current_fitness();
+ }
+
+
+
+
+
+
