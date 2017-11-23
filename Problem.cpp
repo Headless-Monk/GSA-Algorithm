@@ -121,7 +121,7 @@ ostream& operator<<(ostream& os, const Problem& pbm)
 
 istream& operator>>(istream& is, Problem& pbm)
 {
-    cout << "Entrez les valeurs sous la forme (x,x,x,x,x) avec un 'n' si la valeur ne change pas" << endl;
+    cout << "Entrez les valeurs sous la forme (Numero probleme;Direction;Limite basse;Limite haute;Dimension)" << endl;
 
     char c;
     int tmp_1;
@@ -129,27 +129,22 @@ istream& operator>>(istream& is, Problem& pbm)
     is >> c;
 
     is >> tmp_1;
-    if(tmp_1 != 'n')
         pbm.set_num_pbm(tmp_1);
     is >> c;
 
     is >> tmp_1;
-    if(tmp_1 != 'n')
         pbm.set_direction(tmp_1);
     is >> c;
 
     is >> tmp_2;
-    if(tmp_2 != 'n')
         pbm.set_LowerLimit(tmp_2);
     is >> c;
 
     is >> tmp_2;
-    if(tmp_2 != 'n')
         pbm.set_UpperLimit(tmp_2);
     is >> c;
 
     is >> tmp_1;
-    if(tmp_1 != 'n')
         pbm.set_dimension(tmp_1);
     is >> c;
 }

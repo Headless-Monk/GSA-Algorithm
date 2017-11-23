@@ -69,7 +69,7 @@ double Solution::fitness()
       case 6 : //Weierstrass -> à corriger
         for(int i=0; i<=_pbm.get_dimension(); i++)
         {
-            sum += pow(0.7, i) * cos ( pow(0.025 * i , i) * M_PI * i)
+            sum += pow(0.7, i) * cos ( pow(0.025 * i , i) * M_PI * i);
         }
         break;
     }
