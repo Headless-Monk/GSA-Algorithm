@@ -11,6 +11,11 @@ Solution::Solution(const Problem& pbm):
 Solution::~Solution()
 {}
 
+void Solution::initialize()
+{
+    //rempli _solution et donne 30 coordonnées aléatoires
+}
+
 double Solution::fitness()
 {
     double sum = 0;
@@ -132,12 +137,12 @@ void Solution::set_position(point pos)
     _position = pos;
 }
 
-void Solution::set_position_X(int x)
+void Solution::set_position_X(double x)
 {
     _position.x = x;
 }
 
-void Solution::set_position_Y(int y)
+void Solution::set_position_Y(double y)
 {
     _position.y = y;
 }
@@ -200,13 +205,3 @@ void Solution::delete_solution()
 {
     _solution.pop_back();
 }
-
-
-
-
-
-
-
-
-
-

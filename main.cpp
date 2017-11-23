@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 #include "SetUpParams.h"
 #include "Problem.h"
@@ -50,6 +51,7 @@ void testSolution()
 
 int main()
 {
+    srand(time(NULL));
     //testSetUpParam();
     //testProblem();
     //testSolution();

@@ -5,11 +5,12 @@
 #include <ostream>
 #include <cmath>
 
+
 #include "Problem.h"
 
 struct point
 {
-    int x, y;
+    double x, y;
 };
 
 class Solution
@@ -29,7 +30,7 @@ public:
 	//bool operator== (const Solution& sol) const;
 	//bool operator!= (const Solution& sol) const;
 
-	void initialize();
+	void initialize(); //randomize agents positions
 	double fitness();
 	void mass_calculation();
 	unsigned int size() const;
@@ -54,17 +55,23 @@ public:
 	void set_acceleration(double acceleration);
 	void set_mass(double acceleration);
 	void set_position(point pos);
-	void set_position_X(int x);
-	void set_position_Y(int y);
+	void set_position_X(double x);
+	void set_position_Y(double y);
 
 private:
+	const Problem& _pbm;
+
+
+
   double _velocity;
   double _acceleration;
   double _mass;
-  point _position;
+  point _position; //à remplacer par _solution
+
 	std::vector<double> _solution;
+
 	double _current_fitness;
-	const Problem& _pbm;
+
 };
 
 #endif
