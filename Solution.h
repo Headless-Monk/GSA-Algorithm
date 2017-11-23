@@ -3,13 +3,14 @@
 
 #include <vector>
 #include <ostream>
+#include <cmath>
+
+#include "Problem.h"
 
 struct point
 {
     int x, y;
 };
-
-class Problem;
 
 class Solution
 {

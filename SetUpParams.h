@@ -21,15 +21,15 @@ public:
 	friend std::istream& operator>> (std::istream& is, SetUpParams& setup);
 	void edit_params();
 
-	const unsigned int   independent_runs() const;
-	const unsigned int   nb_evolution_steps() const;
-	const unsigned int   population_size() const;
-	const unsigned int   solution_size() const;
+	const unsigned int   get_independent_runs() const;
+	const unsigned int   get_nb_evolution_steps() const;
+	const unsigned int   get_population_size() const;
+	const unsigned int   get_solution_size() const;
 
-	void independent_runs(const unsigned int val);
-	void nb_evolution_steps(const unsigned int val);
-	void population_size(const unsigned int val);
-	void solution_size(const unsigned int val);
+	void set_independent_runs(const unsigned int val);
+	void set_nb_evolution_steps(const unsigned int val);
+	void set_population_size(const unsigned int val);
+	void set_solution_size(const unsigned int val);
 };
 
 #endif

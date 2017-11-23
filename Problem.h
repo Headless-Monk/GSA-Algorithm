@@ -13,17 +13,17 @@ public:
 	friend ostream& operator<< (ostream& os, const Problem& pbm);
 	friend istream& operator>> (istream& is, Problem& pbm);
 
-	void _set_num_pbm(int num);
-	void _set_direction(int direction);
-	void _set_LowerLimit(double lowerLimit);
-	void _set_UpperLimit(double upperLimit);
-	void _set_dimension(int dimension);
+	void set_num_pbm(int num);
+	void set_direction(int direction);
+	void set_LowerLimit(double lowerLimit);
+	void set_UpperLimit(double upperLimit);
+	void set_dimension(int dimension);
 
-	int _get_num_pbm() const;
-	int _get_direction() const;
-	double _get_LowerLimit() const;
-	double _get_UpperLimit() const;
-	int _get_dimension() const;
+	int get_num_pbm() const;
+	int get_direction() const;
+	double get_LowerLimit() const;
+	double get_UpperLimit() const;
+	int get_dimension() const;
 
 	Problem& operator=  (const Problem& pbm);
 	bool operator== (const Problem& pbm) const;
