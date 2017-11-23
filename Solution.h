@@ -58,10 +58,10 @@ public:
 	void set_position_Y(int y);
 
 private:
-    double _velocity;
-    double _acceleration;
-    double _mass;
-    point _position;
+  double _velocity;
+  double _acceleration;
+  double _mass;
+  point _position;
 	std::vector<double> _solution;
 	double _current_fitness;
 	const Problem& _pbm;
