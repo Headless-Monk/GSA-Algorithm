@@ -38,24 +38,22 @@ void testProblem()
 
 void testSolution()
 {
-    Problem prob_rosen{1};
+    Problem prob_rosen{4};
     Solution sol_rosen{prob_rosen};
-    sol_rosen.fitness();
-    Problem prob{1};
-    Solution sol_A{prob};
-    cout << sol_A;
+
+    sol_rosen.initialize();
+
+    cout << sol_rosen;
     cout << endl;
-    cin >> sol_A;
-    cout << sol_A;
 }
 
 int main()
 {
     srand(time(NULL));
-    
+
     //testSetUpParam();
     //testProblem();
-    //testSolution();
+    testSolution();
 
   return 0;
 }

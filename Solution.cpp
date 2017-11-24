@@ -147,10 +147,11 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << "Velocite         : " << sol.get_velocity() << endl;
     os << "Acceleration     : " << sol.get_acceleration() << endl;
     os << "Masse            : " << sol.get_mass() << endl;
-    os << "Fitness actuelle : " << sol.get_current_fitness();
-    os << "Positions        : ";
-    for(int i=0; i<sol.get_position().size(); i++)
-        os << sol.get_position()[i] << " ";
+    os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
+    os << "Positions        : [";
+    vector <double> positions = sol.get_position();
+    for(int i=0; i<positions.size(); i++)
+        os << positions[i] << " ";
     os << endl;
  }
 

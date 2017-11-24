@@ -31,7 +31,6 @@ public:
 	//bool operator== (const Solution& sol) const;
 	//bool operator!= (const Solution& sol) const;
 
-	void initialize(); //randomize agents positions
 	double fitness();
 	void mass_calculation();
 	unsigned int size() const;
@@ -40,6 +39,7 @@ public:
 
 
 
+	void initialize(); //randomize agents positions
 	void add_position(double sol);
 	void delete_position();
 
