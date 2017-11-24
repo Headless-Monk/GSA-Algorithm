@@ -13,7 +13,9 @@ Solution::~Solution()
 
 void Solution::initialize()
 {
-    //rempli _solution et donne 30 coordonnées aléatoires
+    _position.resize(_pbm.get_dimension());
+    for(int i=0; i<_position.size(); i++)
+        _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
 }
 
 double Solution::fitness()
@@ -105,7 +107,7 @@ double Solution::get_mass() const
     return _mass;
 }
 
-point Solution::get_position() const
+vector<double> Solution::get_position() const
 {
     return _position;
 }
@@ -132,20 +134,11 @@ void Solution::set_mass(double mass)
     _mass = mass;
 }
 
-void Solution::set_position(point pos)
+void Solution::set_position(int pos, double val)
 {
-    _position = pos;
+    _position[pos] = val;
 }
 
-void Solution::set_position_X(double x)
-{
-    _position.x = x;
-}
-
-void Solution::set_position_Y(double y)
-{
-    _position.y = y;
-}
 
 /* OPERATEURS DE FLUX */
 
@@ -154,13 +147,16 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << "Velocite         : " << sol.get_velocity() << endl;
     os << "Acceleration     : " << sol.get_acceleration() << endl;
     os << "Masse            : " << sol.get_mass() << endl;
-    os << "Position         : " << sol.get_position().x << "," << sol.get_position().y << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness();
+    os << "Positions        : ";
+    for(int i=0; i<sol.get_position().size(); i++)
+        os << sol.get_position()[i] << " ";
+    os << endl;
  }
 
 std::istream&  operator>>(std::istream& is, Solution& sol)
 {
-    cout << "Entrez les valeurs sous la forme (velocite;acceleration;masse;position_x;position_y;fitness)" << endl;
+    cout << "Entrez les valeurs sous la forme (velocite;acceleration;masse;fitness)" << endl;
 
     char c;
     double tmp;
@@ -179,29 +175,16 @@ std::istream&  operator>>(std::istream& is, Solution& sol)
     is >> c;
 
     is >> tmp;
-        sol.set_position_X((int)tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_position_Y((int)tmp);
-    is >> c;
-
-    is >> tmp;
         sol.set_current_fitness(tmp);
     is >> c;
 }
 
-std::vector<double>& Solution::get_solution()
+void Solution::add_position(double sol)
 {
-    return _solution;
+    _position.push_back(sol);
 }
 
-void Solution::add_solution(double sol)
+void Solution::delete_position()
 {
-    _solution.push_back(sol);
-}
-
-void Solution::delete_solution()
-{
-    _solution.pop_back();
+    _position.pop_back();
 }

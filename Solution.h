@@ -4,6 +4,7 @@
 #include <vector>
 #include <ostream>
 #include <cmath>
+#include <cstdlib>
 
 
 #include "Problem.h"
@@ -39,37 +40,31 @@ public:
 
 
 
-	void add_solution(double sol);
-	void delete_solution();
+	void add_position(double sol);
+	void delete_position();
 
 	double get_current_fitness() const;
 	double get_velocity() const;
 	double get_acceleration() const;
 	double get_mass() const;
-	point get_position() const;
+	std::vector<double> get_position() const;
 	const Problem& get_pbm() const;
-	std::vector<double>& get_solution();
 
 	void set_current_fitness(double fit);
 	void set_velocity(double velocity);
 	void set_acceleration(double acceleration);
 	void set_mass(double acceleration);
-	void set_position(point pos);
-	void set_position_X(double x);
-	void set_position_Y(double y);
+	void set_position(int pos, double val);
+
 
 private:
 	const Problem& _pbm;
-
+  std::vector<double> _position;
 
 
   double _velocity;
   double _acceleration;
   double _mass;
-  point _position; //à remplacer par _solution
-
-	std::vector<double> _solution;
-
 	double _current_fitness;
 
 };

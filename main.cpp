@@ -52,6 +52,7 @@ void testSolution()
 int main()
 {
     srand(time(NULL));
+    
     //testSetUpParam();
     //testProblem();
     //testSolution();
