@@ -38,12 +38,12 @@ void testProblem()
 
 void testSolution()
 {
-    Problem prob{5};
+    Problem prob{1};
     Solution sol{prob};
 
     sol.initialize();
     //for(int i=0; i<sol.get_size(); i++)
-      //sol.set_position(i, 0);
+      //sol.set_position(i, 1);
     cout << sol;
     cout << endl;
 

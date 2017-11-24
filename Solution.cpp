@@ -82,11 +82,13 @@ double Solution::fitness()
         _current_fitness = sum;
         break;
 
-      case 6 : //Weierstrass -> à faire
-        for(int i=0; i<=_pbm.get_dimension(); i++)
+      case 6 : //Weierstrass
+        for(int i=0; i<500; i++) //0 à infini
         {
-            sum += pow(0.7, i) * cos ( pow(0.025 * i , i) * M_PI * i);
+            sum += pow(0.7, i) * cos ( pow(3, i) * M_PI * _position[0]);
         }
+
+        _current_fitness = sum;
         break;
     }
 }
