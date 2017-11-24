@@ -31,11 +31,11 @@ public:
 	//bool operator== (const Solution& sol) const;
 	//bool operator!= (const Solution& sol) const;
 
-	double fitness();
 	void mass_calculation();
 
 
 
+	double fitness();
 	void initialize(); //randomize agents positions
 	void add_position(double sol);
 	void delete_position();
