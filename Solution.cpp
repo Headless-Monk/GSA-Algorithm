@@ -33,47 +33,56 @@ double Solution::fitness()
             sum += pow(100 * (_position[i+1] - pow(_position[i], 2)), 2) + pow(_position[i]-1, 2);
             //std::cout << pow(_position[i]-1, 2) << " ; " << std::endl;
         }
+
         _current_fitness = sum;
         break;
 
       case 2 : //Rastrigin
-        sum = 10 * _pbm.get_dimension();
-        for(int i=1; i<=_pbm.get_dimension(); i++)
+        sum = 10 * _position.size();
+        for(int i=0; i<_position.size(); i++)
         {
-            sum += pow(i, 2) - 10*cos(2*M_PI*i);
+            sum += pow(_position[i], 2) - 10*cos(2*M_PI*_position[i]);
         }
+
+        _current_fitness = sum;
         break;
 
       case 3 : //Ackley
-        for(int i=1; i<=_pbm.get_dimension(); i++)
+        for(int i=0; i<_position.size(); i++)
         {
-            tmp1 += pow(i, 2);
+            tmp1 += pow(_position[i], 2);
         }
 
-        for(int i=1; i<=_pbm.get_dimension(); i++)
+        for(int i=0; i<_position.size(); i++)
         {
-            tmp2 += cos(2*M_PI*i);
+            tmp2 += cos(2*M_PI*_position[i]);
         }
 
-        sum += -20 * exp(-0.2 * sqrt((1/_pbm.get_dimension())*tmp1));
-        sum -= exp((1/_pbm.get_dimension())*tmp2);
+        sum += -20 * exp(-0.2 * sqrt((1./_position.size())*tmp1));
+        sum -= exp((1./_position.size())*tmp2);
         sum += 20 + exp(1);
+
+        _current_fitness = sum;
         break;
 
       case 4 : //Schwefel
-        for(int i=1; i<=_pbm.get_dimension(); i++)
+        for(int i=0; i<_position.size(); i++)
         {
-            tmp1 += i * sin(sqrt(i));
+            tmp1 += _position[i] * sin(sqrt(abs(_position[i])));
         }
-        sum += 418.9829 * _pbm.get_dimension() - tmp1 ;
+        sum += 418.9829 * _position.size() - tmp1 ;
+
+        _current_fitness = sum;
         break;
 
       case 5 : //Schaffer
         sum += 0.5 +
-        ( pow(sin(pow(1,2)-pow(2,2)),2)  - 0.5 ) / (pow(1+0.001 * (pow(1,2)+pow(2,2)),2));
+        ( pow(sin(pow(_position[0],2)-pow(_position[1],2)),2)  - 0.5 ) / (pow(1+0.001 * (pow(_position[0],2)+pow(_position[1],2)),2));
+
+        _current_fitness = sum;
         break;
 
-      case 6 : //Weierstrass -> à corriger
+      case 6 : //Weierstrass -> à faire
         for(int i=0; i<=_pbm.get_dimension(); i++)
         {
             sum += pow(0.7, i) * cos ( pow(0.025 * i , i) * M_PI * i);
