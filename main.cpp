@@ -38,13 +38,15 @@ void testProblem()
 
 void testSolution()
 {
-    Problem prob_rosen{4};
+    Problem prob_rosen{1};
     Solution sol_rosen{prob_rosen};
 
     sol_rosen.initialize();
-
     cout << sol_rosen;
     cout << endl;
+
+    sol_rosen.fitness();
+    cout << "fitness : " << sol_rosen.get_current_fitness() << endl;
 }
 
 int main()

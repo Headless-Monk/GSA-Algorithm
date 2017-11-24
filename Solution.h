@@ -59,12 +59,12 @@ public:
 private:
 	const Problem& _pbm;
   std::vector<double> _position;
+	double _current_fitness;
 
 
   double _velocity;
   double _acceleration;
   double _mass;
-	double _current_fitness;
 
 };
 

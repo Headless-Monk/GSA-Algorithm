@@ -28,10 +28,12 @@ double Solution::fitness()
     switch(_pbm.get_num_pbm())
     {
       case 1 : //Rosenbrock
-        for(int i=1; i<_pbm.get_dimension(); i++)
+        for(int i=0; i<_position.size()-1; i++)
         {
-            sum += pow(100 * (i+1 - pow(i, 2)), 2) + pow(i-1, 2);
+            sum += pow(100 * (_position[i+1] - pow(_position[i], 2)), 2) + pow(_position[i]-1, 2);
+            //std::cout << pow(_position[i]-1, 2) << " ; " << std::endl;
         }
+        _current_fitness = sum;
         break;
 
       case 2 : //Rastrigin
@@ -153,7 +155,7 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << "Acceleration     : " << sol.get_acceleration() << endl;
     os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
-    os << "Positions        : [";
+    os << "Positions        : ";
     for(int i=0; i<sol.get_size(); i++)
         os << sol.get_position(i) << " ";
     os << endl;
