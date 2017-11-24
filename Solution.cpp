@@ -107,9 +107,14 @@ double Solution::get_mass() const
     return _mass;
 }
 
-vector<double> Solution::get_position() const
+unsigned int Solution::get_size() const
 {
-    return _position;
+    return _position.size();
+}
+
+double Solution::get_position(const int index) const
+{
+    return _position[index];
 }
 
 /* SETTER */
@@ -134,9 +139,9 @@ void Solution::set_mass(double mass)
     _mass = mass;
 }
 
-void Solution::set_position(int pos, double val)
+void Solution::set_position(const int index, const double val)
 {
-    _position[pos] = val;
+    _position[index] = val;
 }
 
 
@@ -149,9 +154,8 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
     os << "Positions        : [";
-    vector <double> positions = sol.get_position();
-    for(int i=0; i<positions.size(); i++)
-        os << positions[i] << " ";
+    for(int i=0; i<sol.get_size(); i++)
+        os << sol.get_position(i) << " ";
     os << endl;
  }
 

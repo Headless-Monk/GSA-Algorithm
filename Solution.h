@@ -33,9 +33,6 @@ public:
 
 	double fitness();
 	void mass_calculation();
-	unsigned int size() const;
-	double& position(const int index); //retournera une position du tableau _solution
-	void  position(const int index, const double value);
 
 
 
@@ -47,14 +44,16 @@ public:
 	double get_velocity() const;
 	double get_acceleration() const;
 	double get_mass() const;
-	std::vector<double> get_position() const;
 	const Problem& get_pbm() const;
+	unsigned int get_size() const;
+	double get_position(const int index) const;
+
 
 	void set_current_fitness(double fit);
 	void set_velocity(double velocity);
 	void set_acceleration(double acceleration);
 	void set_mass(double acceleration);
-	void set_position(int pos, double val);
+	void set_position(const int index, const double val);
 
 
 private:
