@@ -16,6 +16,28 @@ void Solution::initialize()
     _position.resize(_pbm.get_dimension());
     for(int i=0; i<_position.size(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
+    _mass = 0;
+}
+
+void Solution::mass_calculation(const Solution &minFit, const Solution &maxFit)
+{
+    if(minFit._current_fitness == maxFit._current_fitness)
+        _mass = 1;
+    else
+    {
+        double best, worst;
+        if(_pbm.get_direction() == 1)
+        {
+            best = minFit._current_fitness;
+            worst = maxFit._current_fitness;
+        }
+        else
+        {
+            best = maxFit._current_fitness;
+            worst = minFit._current_fitness;
+        }
+        _mass = (_current_fitness - worst) / (best - worst);
+    }
 }
 
 double Solution::fitness()

@@ -31,10 +31,10 @@ public:
 	//bool operator== (const Solution& sol) const;
 	//bool operator!= (const Solution& sol) const;
 
-	void mass_calculation();
 
 
 
+	void mass_calculation(const Solution &minFit, const Solution &maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
 	double fitness();
 	void initialize(); //randomize agents positions
 	void add_position(double sol);
@@ -60,11 +60,11 @@ private:
 	const Problem& _pbm;
   std::vector<double> _position;
 	double _current_fitness;
+  double _mass; // best=1 ; worst=0
 
 
   double _velocity;
   double _acceleration;
-  double _mass;
 
 };
 

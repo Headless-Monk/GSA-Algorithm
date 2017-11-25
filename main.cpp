@@ -52,13 +52,45 @@ void testSolution()
     cout << "fitness : " << sol.get_current_fitness() << endl;
 }
 
+void testMass()
+{
+  Problem prob{1};
+
+  Solution sol1{prob};
+  Solution sol2{prob};
+  Solution sol3{prob};
+
+  sol1.initialize();
+  for(int i=0; i<sol1.get_size(); i++)
+    sol1.set_position(i, 1);
+  sol2.initialize();
+  for(int i=0; i<sol2.get_size()-10; i++)
+    sol2.set_position(i, 1);
+  sol3.initialize();
+
+  sol1.fitness();
+  cout << "fitness 1 : " << sol1.get_current_fitness() << endl;
+  sol2.fitness();
+  cout << "fitness 2 : " << sol2.get_current_fitness() << endl;
+  sol3.fitness();
+  cout << "fitness 3 : " << sol3.get_current_fitness() << endl << endl;
+
+  sol1.mass_calculation(sol1, sol3);
+  cout << "mass 1 : " << sol1.get_mass() << endl;
+  sol2.mass_calculation(sol1, sol3);
+  cout << "mass 2 : " << sol2.get_mass() << endl;
+  sol3.mass_calculation(sol1, sol3);
+  cout << "mass 3 : " << sol3.get_mass() << endl;
+}
+
 int main()
 {
     srand(time(NULL));
 
     //testSetUpParam();
     //testProblem();
-    testSolution();
+    //testSolution();
+    testMass();
 
   return 0;
 }
