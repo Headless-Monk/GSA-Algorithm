@@ -19,6 +19,7 @@ private:
 	const Problem &_pbm;
 	unsigned int _upper_cost, _lower_cost; // lower and upper fitness of individuals in population
 
+	double _g;
 public:
 	MyAlgorithm(const Problem& pbm, const SetUpParams& setup);
 	~MyAlgorithm();

@@ -31,9 +31,7 @@ public:
 	//bool operator== (const Solution& sol) const;
 	//bool operator!= (const Solution& sol) const;
 
-
-
-
+	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
 	void mass_calculation(const Solution &minFit, const Solution &maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
 	double fitness();
 	void initialize(); //randomize agents positions
@@ -61,6 +59,7 @@ private:
   std::vector<double> _position;
 	double _current_fitness;
   double _mass; // best=1 ; worst=0
+	double _inertia_mass;
 
 
   double _velocity;

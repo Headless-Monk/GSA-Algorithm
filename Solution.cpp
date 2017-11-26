@@ -19,6 +19,12 @@ void Solution::initialize()
     _mass = 0;
 }
 
+void Solution::inertia_mass_calculation(double mass_sum)
+{
+    _inertia_mass = _mass / mass_sum;
+}
+
+
 void Solution::mass_calculation(const Solution &minFit, const Solution &maxFit)
 {
     if(minFit._current_fitness == maxFit._current_fitness)
