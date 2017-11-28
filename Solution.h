@@ -25,12 +25,14 @@ public:
 	friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
 	friend std::istream& operator>> (std::istream& is, Solution& sol);
 
-
-
 	//Solution& operator=  (const Solution& sol);
 	//bool operator== (const Solution& sol) const;
 	//bool operator!= (const Solution& sol) const;
 
+	void update_solution();
+	double force_calculation(Solution &Sol, double g);
+	void total_force_calculation(std::vector<Solution*> v, double g);
+	void acceleration_calculation();
 	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
 	void mass_calculation(const Solution &minFit, const Solution &maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
 	double fitness();
@@ -46,13 +48,11 @@ public:
 	unsigned int get_size() const;
 	double get_position(const int index) const;
 
-
 	void set_current_fitness(double fit);
 	void set_velocity(double velocity);
 	void set_acceleration(double acceleration);
 	void set_mass(double acceleration);
 	void set_position(const int index, const double val);
-
 
 private:
 	const Problem& _pbm;
@@ -60,7 +60,7 @@ private:
 	double _current_fitness;
   double _mass; // best=1 ; worst=0
 	double _inertia_mass;
-
+	double _total_force;
 
   double _velocity;
   double _acceleration;

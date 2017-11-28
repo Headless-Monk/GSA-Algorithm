@@ -17,6 +17,7 @@ void Solution::initialize()
     for(int i=0; i<_position.size(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
     _mass = 0;
+    _velocity = 0;
 }
 
 void Solution::inertia_mass_calculation(double mass_sum)
@@ -44,6 +45,45 @@ void Solution::mass_calculation(const Solution &minFit, const Solution &maxFit)
         }
         _mass = (_current_fitness - worst) / (best - worst);
     }
+}
+
+double Solution::force_calculation(Solution &Sol, double g)
+{
+    double sum = 0;
+    for(unsigned int i = 0; i < _position.size(); i++)
+    {
+        sum += pow(Sol._position[i] - _position[i], 2);
+    }
+    sum = sqrt(sum);
+}
+
+
+/*
+A FINIR RRRRRRRRRRRRRRRRR
+questions :
+- c'est quoi les rand ?
+- c'est quoi les d ?
+- lui demander pour le bordel de force calculat°
+*/
+void Solution::total_force_calculation(std::vector<Solution*> v, double g)
+{
+    _total_force = 0;
+    for(unsigned int i = 0; i < v.size(); i++)
+    {
+        _total_force += (/*rand*/1 * force_calculation(*v[i],g));
+    }
+}
+
+void Solution::acceleration_calculation()
+{
+    _acceleration = _total_force/_inertia_mass;
+}
+
+void Solution::update_solution()
+{
+    _velocity = /*rand*/1 * _velocity + _acceleration;
+    for(unsigned int i = 0; i < _position.size(); i++)
+        _position[i] = /*rand*/1 * _velocity + _acceleration;
 }
 
 double Solution::fitness()
