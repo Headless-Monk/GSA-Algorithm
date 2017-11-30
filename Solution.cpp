@@ -24,22 +24,23 @@ void Solution::inertia_mass_calculation(double mass_sum)
 }
 
 
-void Solution::mass_calculation(const Solution &minFit, const Solution &maxFit)
+void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 {
-    if(minFit._current_fitness == maxFit._current_fitness)
+    if(minFit->_current_fitness == maxFit->_current_fitness)
         _mass = 1;
     else
     {
         double best, worst;
+
         if(_pbm.get_direction() == 1)
         {
-            best = minFit._current_fitness;
-            worst = maxFit._current_fitness;
+            best = minFit->_current_fitness;
+            worst = maxFit->_current_fitness;
         }
         else
         {
-            best = maxFit._current_fitness;
-            worst = minFit._current_fitness;
+            best = maxFit->_current_fitness;
+            worst = minFit->_current_fitness;
         }
         _mass = (_current_fitness - worst) / (best - worst);
     }
@@ -63,7 +64,7 @@ vector<double> Solution::force_calculation(Solution *Sol, double g)
     return force;
 }
 
-void Solution::total_force_calculation(std::vector<Solution*> v, double g)
+void Solution::total_force_calculation(std::vector<Solution*> &v, double g)
 {
     _total_force.reserve(_pbm.get_dimension());
     _total_force.resize(30,0);
@@ -85,12 +86,20 @@ void Solution::acceleration_calculation()
 
 void Solution::update_solution()
 {
-    _velocity.reserve(_pbm.get_dimension());
+    _velocity.resize(_pbm.get_dimension());
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
     {
-        _velocity.push_back(((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i]);
-        _position.push_back(((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i]);
+        _velocity[i] = ((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i];
+        _position[i] = ((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i];
     }
+}
+
+bool Solution::check_boundaries()
+{
+  for(unsigned int i=0; i<_pbm.get_dimension(); i++)
+    if(_position[i]>_pbm.get_UpperLimit() || _position[i]<_pbm.get_LowerLimit())
+      return false;
+  return true;
 }
 
 double Solution::fitness()
@@ -221,10 +230,10 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     //os << "Acceleration     : " << sol.get_acceleration() << endl;
     os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
-    os << "Positions        : ";
+    /*os << "Positions        : ";
     for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_position(i) << " ";
-    os << endl;
+        os << sol.get_position(i) << " ";*/
+    //os << endl;
  }
 
 std::istream&  operator>>(std::istream& is, Solution& sol)

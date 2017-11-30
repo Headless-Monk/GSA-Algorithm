@@ -4,6 +4,7 @@
 #include "SetUpParams.h"
 #include "Problem.h"
 #include "Solution.h"
+#include "MyAlgorithm.h"
 
 using std::cout;
 using std::endl;
@@ -54,7 +55,7 @@ void testSolution()
 
 void testMass()
 {
-  Problem prob{1};
+  /*Problem prob{1};
 
   Solution sol1{prob};
   Solution sol2{prob};
@@ -80,8 +81,23 @@ void testMass()
   sol2.mass_calculation(sol1, sol3);
   cout << "mass 2 : " << sol2.get_mass() << endl;
   sol3.mass_calculation(sol1, sol3);
-  cout << "mass 3 : " << sol3.get_mass() << endl;
+  cout << "mass 3 : " << sol3.get_mass() << endl;*/
 }
+
+void testAlgo()
+{
+  Problem prob{1};
+  SetUpParams setup{};
+  setup.set_nb_evolution_steps(10);
+
+  MyAlgorithm algo{prob, setup};
+  algo.initialize();
+  algo.evolution(setup.get_nb_evolution_steps());
+
+  cout << "best : " << endl;
+  algo.afficher_best();
+}
+
 
 int main()
 {
@@ -90,6 +106,7 @@ int main()
     //testProblem();
     //testSolution();
     //testMass();
+    testAlgo();
 
   return 0;
 }
