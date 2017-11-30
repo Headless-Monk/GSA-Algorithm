@@ -9,11 +9,6 @@
 
 #include "Problem.h"
 
-struct point
-{
-    double x, y;
-};
-
 class Solution
 {
 	//contient la declaration d'une solution

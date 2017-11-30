@@ -86,7 +86,6 @@ void testMass()
 int main()
 {
     srand(time(NULL));
-
     //testSetUpParam();
     //testProblem();
     //testSolution();

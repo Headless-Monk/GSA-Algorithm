@@ -103,7 +103,7 @@ double Solution::fitness()
     switch(_pbm.get_num_pbm())
     {
       case 1 : //Rosenbrock
-        for(int i=0; i<_position.size()-1; i++)
+        for(unsigned int i=0; i<_position.size()-1; i++)
         {
             sum += pow(100 * (_position[i+1] - pow(_position[i], 2)), 2) + pow(_position[i]-1, 2);
             //std::cout << pow(_position[i]-1, 2) << " ; " << std::endl;
@@ -114,7 +114,7 @@ double Solution::fitness()
 
       case 2 : //Rastrigin
         sum = 10 * _position.size();
-        for(int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_position.size(); i++)
         {
             sum += pow(_position[i], 2) - 10*cos(2*M_PI*_position[i]);
         }
@@ -123,12 +123,12 @@ double Solution::fitness()
         break;
 
       case 3 : //Ackley
-        for(int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_position.size(); i++)
         {
             tmp1 += pow(_position[i], 2);
         }
 
-        for(int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_position.size(); i++)
         {
             tmp2 += cos(2*M_PI*_position[i]);
         }
@@ -141,7 +141,7 @@ double Solution::fitness()
         break;
 
       case 4 : //Schwefel
-        for(int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_position.size(); i++)
         {
             tmp1 += _position[i] * sin(sqrt(abs(_position[i])));
         }
@@ -158,7 +158,7 @@ double Solution::fitness()
         break;
 
       case 6 : //Weierstrass
-        for(int i=0; i<500; i++) //0 à infini
+        for(unsigned int i=0; i<500; i++) //0 à infini
         {
             sum += pow(0.7, i) * cos ( pow(3, i) * M_PI * _position[0]);
         }
@@ -222,7 +222,7 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
     os << "Positions        : ";
-    for(int i=0; i<sol.get_size(); i++)
+    for(unsigned int i=0; i<sol.get_size(); i++)
         os << sol.get_position(i) << " ";
     os << endl;
  }
