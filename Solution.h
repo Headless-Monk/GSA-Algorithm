@@ -30,7 +30,7 @@ public:
 	//bool operator!= (const Solution& sol) const;
 
 	void update_solution();
-	double force_calculation(Solution &Sol, double g);
+	vector<double> force_calculation(Solution *Sol, double g);
 	void total_force_calculation(std::vector<Solution*> v, double g);
 	void acceleration_calculation();
 	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
@@ -41,29 +41,25 @@ public:
 	void delete_position();
 
 	double get_current_fitness() const;
-	double get_velocity() const;
-	double get_acceleration() const;
 	double get_mass() const;
 	const Problem& get_pbm() const;
 	unsigned int get_size() const;
 	double get_position(const int index) const;
 
 	void set_current_fitness(double fit);
-	void set_velocity(double velocity);
-	void set_acceleration(double acceleration);
 	void set_mass(double acceleration);
 	void set_position(const int index, const double val);
 
 private:
 	const Problem& _pbm;
-  std::vector<double> _position;
+    std::vector<double> _position;
 	double _current_fitness;
-  double _mass; // best=1 ; worst=0
+    double _mass; // best=1 ; worst=0
 	double _inertia_mass;
-	double _total_force;
+	vector<double> _total_force;
 
-  double _velocity;
-  double _acceleration;
+    vector<double> _velocity;
+    vector<double> _acceleration;
 
 };
 

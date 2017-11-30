@@ -23,7 +23,7 @@ public:
 	int get_direction() const;
 	double get_LowerLimit() const;
 	double get_UpperLimit() const;
-	int get_dimension() const;
+	unsigned int get_dimension() const;
 
 	Problem& operator=  (const Problem& pbm);
 	bool operator== (const Problem& pbm) const;

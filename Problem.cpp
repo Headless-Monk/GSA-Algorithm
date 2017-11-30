@@ -102,7 +102,7 @@ double Problem::get_UpperLimit() const
     return _UpperLimit;
 }
 
-int Problem::get_dimension() const
+unsigned int Problem::get_dimension() const
 {
     return _dimension;
 }

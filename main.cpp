@@ -61,10 +61,10 @@ void testMass()
   Solution sol3{prob};
 
   sol1.initialize();
-  for(int i=0; i<sol1.get_size(); i++)
+  for(unsigned int i=0; i<sol1.get_size(); i++)
     sol1.set_position(i, 1);
   sol2.initialize();
-  for(int i=0; i<sol2.get_size()-10; i++)
+  for(unsigned int i=0; i<sol2.get_size()-10; i++)
     sol2.set_position(i, 1);
   sol3.initialize();
 
@@ -90,7 +90,7 @@ int main()
     //testSetUpParam();
     //testProblem();
     //testSolution();
-    testMass();
+    //testMass();
 
   return 0;
 }

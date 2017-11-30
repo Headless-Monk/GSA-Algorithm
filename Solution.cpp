@@ -5,7 +5,7 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm}
+        _pbm{pbm}, _velocity{}, _mass{0}
 {}
 
 Solution::~Solution()
@@ -14,10 +14,8 @@ Solution::~Solution()
 void Solution::initialize()
 {
     _position.resize(_pbm.get_dimension());
-    for(int i=0; i<_position.size(); i++)
+    for(unsigned int i=0; i<_position.size(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
-    _mass = 0;
-    _velocity = 0;
 }
 
 void Solution::inertia_mass_calculation(double mass_sum)
@@ -47,43 +45,52 @@ void Solution::mass_calculation(const Solution &minFit, const Solution &maxFit)
     }
 }
 
-double Solution::force_calculation(Solution &Sol, double g)
+vector<double> Solution::force_calculation(Solution *Sol, double g)
 {
-    double sum = 0;
-    for(unsigned int i = 0; i < _position.size(); i++)
+    double distance;
+    vector<double> force;
+    force.reserve(_pbm.get_dimension());
+
+    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
     {
-        sum += pow(Sol._position[i] - _position[i], 2);
+        distance += pow(Sol->_position[i] - _position[i], 2);
     }
-    sum = sqrt(sum);
+    distance = sqrt(distance);
+
+    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
+        force.push_back(g*((_mass*Sol->_mass)/distance)*(_position[i]-Sol->_position[i]));
+
+    return force;
 }
 
-
-/*
-A FINIR RRRRRRRRRRRRRRRRR
-questions :
-- c'est quoi les rand ?
-- c'est quoi les d ?
-- lui demander pour le bordel de force calculat°
-*/
 void Solution::total_force_calculation(std::vector<Solution*> v, double g)
 {
-    _total_force = 0;
-    for(unsigned int i = 0; i < v.size(); i++)
+    _total_force.reserve(_pbm.get_dimension());
+    _total_force.resize(30,0);
+
+    for(unsigned int j = 0; j < v.size(); j++)
     {
-        _total_force += (/*rand*/1 * force_calculation(*v[i],g));
+        vector<double> force;
+        force = force_calculation(v[j], g);
+        _total_force[j] += ((double)rand() / RAND_MAX) * force[j];
     }
 }
 
 void Solution::acceleration_calculation()
 {
-    _acceleration = _total_force/_inertia_mass;
+    _acceleration.reserve(_pbm.get_dimension());
+    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
+        _acceleration.push_back(_total_force[i]/_inertia_mass);
 }
 
 void Solution::update_solution()
 {
-    _velocity = /*rand*/1 * _velocity + _acceleration;
-    for(unsigned int i = 0; i < _position.size(); i++)
-        _position[i] = /*rand*/1 * _velocity + _acceleration;
+    _velocity.reserve(_pbm.get_dimension());
+    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
+    {
+        _velocity.push_back(((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i]);
+        _position.push_back(((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i]);
+    }
 }
 
 double Solution::fitness()
@@ -173,16 +180,6 @@ double Solution::get_current_fitness() const
     return _current_fitness;
 }
 
-double Solution::get_velocity() const
-{
-    return _velocity;
-}
-
-double Solution::get_acceleration() const
-{
-    return _acceleration;
-}
-
 double Solution::get_mass() const
 {
     return _mass;
@@ -205,16 +202,6 @@ void Solution::set_current_fitness(double fit)
     _current_fitness = fit;
 }
 
-void Solution::set_velocity(double velocity)
-{
-    _velocity = velocity;
-}
-
-void Solution::set_acceleration(double acceleration)
-{
-    _acceleration = acceleration;
-}
-
 void Solution::set_mass(double mass)
 {
     _mass = mass;
@@ -230,8 +217,8 @@ void Solution::set_position(const int index, const double val)
 
 std::ostream& operator<<(std::ostream& os, const Solution& sol)
 {
-    os << "Velocite         : " << sol.get_velocity() << endl;
-    os << "Acceleration     : " << sol.get_acceleration() << endl;
+    //os << "Velocite         : " << sol.get_velocity() << endl;
+    //os << "Acceleration     : " << sol.get_acceleration() << endl;
     os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
     os << "Positions        : ";
@@ -242,6 +229,7 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
 
 std::istream&  operator>>(std::istream& is, Solution& sol)
 {
+    /*
     cout << "Entrez les valeurs sous la forme (velocite;acceleration;masse;fitness)" << endl;
 
     char c;
@@ -263,6 +251,7 @@ std::istream&  operator>>(std::istream& is, Solution& sol)
     is >> tmp;
         sol.set_current_fitness(tmp);
     is >> c;
+    */
 }
 
 void Solution::add_position(double sol)
