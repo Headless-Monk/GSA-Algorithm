@@ -84,13 +84,16 @@ void Solution::acceleration_calculation()
         _acceleration.push_back(_total_force[i]/_inertia_mass);
 }
 
+
+
 void Solution::update_solution()
 {
     _velocity.resize(_pbm.get_dimension());
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
     {
         _velocity[i] = ((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i];
-        _position[i] = ((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i];
+    //cout << _position[i] << " + " << _velocity[i] << endl;
+        _position[i] = _position[i] + _velocity[i];
     }
 }
 
@@ -108,17 +111,20 @@ double Solution::fitness()
 
     double tmp1 = 0;
     double tmp2 = 0;
-
+//    std::cout<<"fit 1 : " << _current_fitness << endl;
     switch(_pbm.get_num_pbm())
     {
       case 1 : //Rosenbrock
         for(unsigned int i=0; i<_position.size()-1; i++)
         {
             sum += pow(100 * (_position[i+1] - pow(_position[i], 2)), 2) + pow(_position[i]-1, 2);
-            //std::cout << pow(_position[i]-1, 2) << " ; " << std::endl;
+            //std::cout << _position[i+1] << " - " << pow(_position[i]-1, 2) << " + " << pow(_position[i]-1, 2) << std::endl;
         }
-
+//std::cout << "p[i+1] : " << _position[0] << " / p[i] : " <<  _position[1];
         _current_fitness = sum;
+//std::cout << " fit2 : " << _current_fitness << std::endl;
+//std::cout << "------------------------------------------------------------------------" << std::endl;
+//std::cout << "------------------------------------------------------------------------" << std::endl;
         break;
 
       case 2 : //Rastrigin
@@ -228,12 +234,12 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
 {
     //os << "Velocite         : " << sol.get_velocity() << endl;
     //os << "Acceleration     : " << sol.get_acceleration() << endl;
-    os << "Masse            : " << sol.get_mass() << endl;
+    //os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
     /*os << "Positions        : ";
     for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_position(i) << " ";*/
-    //os << endl;
+        os << sol.get_position(i) << " ";
+    os << endl;*/
  }
 
 std::istream&  operator>>(std::istream& is, Solution& sol)

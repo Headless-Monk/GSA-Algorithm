@@ -15,8 +15,9 @@ MyAlgorithm::~MyAlgorithm()
 
 void MyAlgorithm::evolution(int iter)
 {
-    if(iter > 0)
+    if(iter < _setup.get_nb_evolution_steps())
     {
+    //cout << iter << endl;
         /* évaluation des individus */
         for(int i=0; i<_pbm.get_dimension(); i++)
             spaceBound(_solutions[i]);
@@ -53,8 +54,8 @@ void MyAlgorithm::evolution(int iter)
         /* mouvement des planetes */
         for(int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->update_solution();
-afficher_all();
-        evolution(iter-1);
+//afficher_best();
+        evolution(iter+1);
     }
 }
 
@@ -67,7 +68,7 @@ void MyAlgorithm::afficher_all()
 
 void MyAlgorithm::afficher_best()
 {
-    std::cout << *_best_Solution_overall << std::endl;
+    std::cout << _best_solution << std::endl;
 }
 
 void MyAlgorithm::spaceBound(Solution *sol)
@@ -111,6 +112,7 @@ void MyAlgorithm::lower_cost()
 
 void MyAlgorithm::best_cost_overall()
 {
+
     if(_pbm.get_direction() == 0) //maximisation
     {
         if(_upper_cost->get_current_fitness() > _best_Solution_overall->get_current_fitness())
@@ -118,7 +120,11 @@ void MyAlgorithm::best_cost_overall()
     }
     else //minimisation
     {
-        if(_lower_cost->get_current_fitness() < _best_Solution_overall->get_current_fitness())
-            _best_Solution_overall = _lower_cost;
+        if(_lower_cost->get_current_fitness() < _best_solution)
+        {
+            //cout << _lower_cost->get_current_fitness() << " < " << _best_Solution_overall->get_current_fitness() << endl;
+            _best_solution = _lower_cost->get_current_fitness();
+            cout << _best_solution << endl;
+        }
     }
 }

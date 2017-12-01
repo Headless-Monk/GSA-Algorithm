@@ -88,11 +88,11 @@ void testAlgo()
 {
   Problem prob{1};
   SetUpParams setup{};
-  setup.set_nb_evolution_steps(10);
 
   MyAlgorithm algo{prob, setup};
   algo.initialize();
-  algo.evolution(setup.get_nb_evolution_steps());
+
+  algo.evolution(0);
 
   cout << "best : " << endl;
   algo.afficher_best();

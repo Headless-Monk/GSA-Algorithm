@@ -60,6 +60,7 @@ private:
 	Solution *_upper_cost, *_lower_cost; // lower and upper fitness of individuals in population
 	double _g;
 	Solution *_best_Solution_overall;
+	double _best_solution;
 	int _iterations;
 
 	//std::vector<struct Particle> _fitness_values;
