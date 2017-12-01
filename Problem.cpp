@@ -2,7 +2,7 @@
 
 Problem::Problem(int num): _num_pbm{num}
 {
-  _dimension = 30;
+  _dimension = 10;
   switch(_num_pbm)
   {
     case 1 : //Rosenbrock

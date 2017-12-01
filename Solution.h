@@ -46,6 +46,8 @@ public:
 	void set_mass(double acceleration);
 	void set_position(const int index, const double val);
 
+	Solution& operator=(const Solution &sol);
+
 private:
 		const Problem& _pbm;
     std::vector<double> _position;
