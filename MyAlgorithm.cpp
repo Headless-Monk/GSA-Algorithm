@@ -17,9 +17,9 @@ MyAlgorithm::~MyAlgorithm()
     delete _best_Solution_overall;
 }
 
-void MyAlgorithm::evolution(int iter)
+void MyAlgorithm::evolution()
 {
-    if(iter < _setup.get_nb_evolution_steps())
+    for(int iter=0; iter<_setup.get_nb_evolution_steps(); iter++)
     {
         /* évaluation des individus */
         for(int i=0; i<_pbm.get_dimension(); i++)
@@ -57,8 +57,6 @@ void MyAlgorithm::evolution(int iter)
         /* mouvement des planetes */
         for(int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->update_solution();
-
-        evolution(iter+1);
     }
 }
 

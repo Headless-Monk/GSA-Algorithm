@@ -2,7 +2,7 @@
 
 
 SetUpParams::SetUpParams():
-    _independent_runs{30}, _nb_evolution_steps{70000},
+    _independent_runs{30}, _nb_evolution_steps{75000},
     _population_size{30}, _solution_size{30}
 {}
 

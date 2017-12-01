@@ -96,7 +96,7 @@ void testAlgo()
   algo.afficher_best();
   cout << endl;
 
-  algo.evolution(0);
+  algo.evolution();
 
   cout << "meilleure solution : " << endl;
   algo.afficher_best();

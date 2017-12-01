@@ -24,7 +24,7 @@ public:
 	void best_cost_overall(); //best fitness
 	double g_evolution(int iter); //calcule g pour une itération
 	void spaceBound(Solution *sol); // check if solutions of iteration are still in boundaries ? else random pos or return to boundaries
-	void evolution(int iter); //makes an evolution step ; recursive function from max_it to 0
+	void evolution(); //makes an evolution step ; recursive function from max_it to 0
 	void afficher_best();
 	void afficher_all();
 
