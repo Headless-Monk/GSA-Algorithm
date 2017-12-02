@@ -25,12 +25,12 @@ public:
 	//bool operator!= (const Solution& sol) const;
 
 	void update_solution();
-	vector<double> force_calculation(Solution *Sol, double g);
+	void force_calculation(Solution *Sol, double g, vector<double> &force);
 	void total_force_calculation(std::vector<Solution*> &v, double g);
 	void acceleration_calculation();
 	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
 	void mass_calculation(const Solution *minFit, const Solution *maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
-	double fitness();
+	void fitness();
 	void initialize(); //randomize agents positions
 	void add_position(double sol);
 	void delete_position();
@@ -49,12 +49,12 @@ public:
 	Solution& operator=(const Solution &sol);
 
 private:
-		const Problem& _pbm;
+    const Problem& _pbm;
     std::vector<double> _position;
-		double _current_fitness;
+    double _current_fitness;
     double _mass; // best=1 ; worst=0
-		double _inertia_mass;
-		vector<double> _total_force;
+    double _inertia_mass;
+    vector<double> _total_force;
 
     vector<double> _velocity;
     vector<double> _acceleration;

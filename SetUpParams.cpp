@@ -2,7 +2,7 @@
 
 
 SetUpParams::SetUpParams():
-    _independent_runs{30}, _nb_evolution_steps{75000},
+    _independent_runs{30}, _nb_evolution_steps{2000000},
     _population_size{30}, _solution_size{30}
 {}
 
@@ -16,6 +16,8 @@ std::ostream& operator<<(std::ostream& os, const SetUpParams& setup)
     os << "nb evolution steps : " << setup._nb_evolution_steps << std::endl;
     os << "population size :    " << setup._population_size << std::endl;
     os << "solution size :      " << setup._solution_size << std::endl;
+
+    return os;
 }
 
 std::istream& operator>> (std::istream& is, SetUpParams& setup)
@@ -34,6 +36,8 @@ std::istream& operator>> (std::istream& is, SetUpParams& setup)
 
     is >> c >> val;
     setup.set_solution_size(val);
+
+    return is;
 }
 
 void SetUpParams::edit_params()

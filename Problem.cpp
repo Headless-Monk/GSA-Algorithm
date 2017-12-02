@@ -118,6 +118,8 @@ ostream& operator<<(ostream& os, const Problem& pbm)
     os << "Limite basse : " << pbm.get_LowerLimit() << endl;
     os << "Limite haute : " << pbm.get_UpperLimit() << endl;
     os << "Dimension : " << pbm.get_dimension();
+
+    return os;
 }
 
 istream& operator>>(istream& is, Problem& pbm)
@@ -148,6 +150,8 @@ istream& operator>>(istream& is, Problem& pbm)
     is >> tmp_1;
         pbm.set_dimension(tmp_1);
     is >> c;
+
+    return is;
 }
 
 /*
@@ -161,6 +165,8 @@ Problem& Problem::operator=(const Problem& pbm)
     set_LowerLimit(pbm.get_LowerLimit());
     set_UpperLimit(pbm.get_UpperLimit());
     set_dimension(pbm.get_dimension());
+
+    return *this;
 }
 
 bool Problem::operator==(const Problem& pbm) const

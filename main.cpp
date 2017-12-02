@@ -94,11 +94,12 @@ void testAlgo()
 
   cout << "première solution : " << endl;
   algo.afficher_best();
-  cout << endl;
+
+  cout << "0        1" << endl;
 
   algo.evolution();
 
-  cout << "meilleure solution : " << endl;
+  cout << endl << endl << "meilleure solution : " << endl;
   algo.afficher_best();
 }
 

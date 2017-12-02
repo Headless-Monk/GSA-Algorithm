@@ -5,8 +5,14 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm}, _velocity{}, _mass{0}
-{}
+        _pbm{pbm},  _mass{0}, _velocity{}, _acceleration{}
+{
+    _acceleration.reserve(_pbm.get_dimension());
+    _acceleration.resize(_pbm.get_dimension());
+
+    _velocity.reserve(_pbm.get_dimension());
+    _velocity.resize(_pbm.get_dimension());
+}
 
 Solution::~Solution()
 {}
@@ -46,10 +52,9 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
-vector<double> Solution::force_calculation(Solution *Sol, double g)
+void Solution::force_calculation(Solution *Sol, double g, vector<double> &force)
 {
     double distance;
-    vector<double> force;
     force.reserve(_pbm.get_dimension());
 
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
@@ -60,8 +65,6 @@ vector<double> Solution::force_calculation(Solution *Sol, double g)
 
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
         force.push_back(g*((_mass*Sol->_mass)/distance)*(_position[i]-Sol->_position[i]));
-
-    return force;
 }
 
 void Solution::total_force_calculation(std::vector<Solution*> &v, double g)
@@ -71,24 +74,22 @@ void Solution::total_force_calculation(std::vector<Solution*> &v, double g)
 
     for(unsigned int j = 0; j < v.size(); j++)
     {
-        vector<double> force;
-        force = force_calculation(v[j], g);
+        vector<double> force{};
+        force_calculation(v[j], g, force);
         _total_force[j] += ((double)rand() / RAND_MAX) * force[j];
     }
 }
 
 void Solution::acceleration_calculation()
 {
-    _acceleration.reserve(_pbm.get_dimension());
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
-        _acceleration.push_back(_total_force[i]/_inertia_mass);
+        _acceleration[i] = (_total_force[i]/_inertia_mass);
 }
 
 
 
 void Solution::update_solution()
 {
-    _velocity.resize(_pbm.get_dimension());
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
     {
         _velocity[i] = ((double)rand() / RAND_MAX) * _velocity[i] + _acceleration[i];
@@ -104,7 +105,7 @@ bool Solution::check_boundaries()
   return true;
 }
 
-double Solution::fitness()
+void Solution::fitness()
 {
     double sum = 0;
 
@@ -235,6 +236,8 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     for(unsigned int i=0; i<sol.get_size(); i++)
         os << sol.get_position(i) << " ";
     os << endl;
+
+    return os;
  }
 
 std::istream&  operator>>(std::istream& is, Solution& sol)
@@ -262,6 +265,8 @@ std::istream&  operator>>(std::istream& is, Solution& sol)
         sol.set_current_fitness(tmp);
     is >> c;
     */
+
+    return is;
 }
 
 void Solution::add_position(double sol)
@@ -283,4 +288,6 @@ Solution& Solution::operator=(const Solution &sol)
     _total_force = sol._total_force;
     _velocity = sol._velocity;
     _acceleration = sol._acceleration;
+
+    return *this;
 }

@@ -11,7 +11,7 @@ MyAlgorithm::MyAlgorithm(const Problem& pbm, const SetUpParams& setup):
 
 MyAlgorithm::~MyAlgorithm()
 {
-    for(unsigned int i = 0; i < _solutions.size(); i++)
+    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
         delete _solutions[i];
 
     delete _best_Solution_overall;
@@ -19,12 +19,20 @@ MyAlgorithm::~MyAlgorithm()
 
 void MyAlgorithm::evolution()
 {
-    for(int iter=0; iter<_setup.get_nb_evolution_steps(); iter++)
+    double c = 0.0;
+    for(unsigned int iter=0; iter<_setup.get_nb_evolution_steps(); iter++)
     {
+        /* chargement */
+        if( ( (double)iter / (double)_setup.get_nb_evolution_steps() ) >= c)
+        {
+            cout << "-";
+            c += 0.1;
+        }
+
         /* évaluation des individus */
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             spaceBound(_solutions[i]);
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->fitness();
 
         /* recherche des solutuions extrémales */
@@ -34,35 +42,35 @@ void MyAlgorithm::evolution()
 
         /* calcul des masses*/
         double mass_sum = 0;
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         {
             _solutions[i]->mass_calculation(_lower_cost, _upper_cost);
             mass_sum += _solutions[i]->get_mass();
         }
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->inertia_mass_calculation(mass_sum);
 
         /* calcul de g */
         _g = g_evolution(iter);
 
         /* calcul des forces */
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->total_force_calculation(_solutions, _g);
 
 
         /* calcul de l'acceleration */
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->acceleration_calculation();
 
         /* mouvement des planetes */
-        for(int i=0; i<_pbm.get_dimension(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->update_solution();
     }
 }
 
 void MyAlgorithm::afficher_all()
 {
-    for(int i=0; i<_pbm.get_dimension(); i++)
+    for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         std::cout << *_solutions[i] << std::endl;
     std::cout << "--------------------------------------" << std::endl;
 }
@@ -88,7 +96,7 @@ double MyAlgorithm::g_evolution(int iter)
 
 void MyAlgorithm::initialize()
 {
-    for(int i = 0; i < _pbm.get_dimension(); i++)
+    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
         _solutions[i]->initialize();
 
     *_best_Solution_overall = *_solutions[0];
@@ -117,15 +125,11 @@ void MyAlgorithm::best_cost_overall()
     if(_pbm.get_direction() == 0) //maximisation
     {
         if(_upper_cost->get_current_fitness() > _best_Solution_overall->get_current_fitness())
-        {
             *_best_Solution_overall = *_upper_cost;
-        }
     }
     else //minimisation
     {
         if(_lower_cost->get_current_fitness() < _best_Solution_overall->get_current_fitness())
-        {
             *_best_Solution_overall = *_lower_cost;
-        }
     }
 }
