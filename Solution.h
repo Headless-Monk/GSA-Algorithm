@@ -38,9 +38,12 @@ public:
 
 	double get_current_fitness() const;
 	double get_mass() const;
+	double get_inertia_mass() const;
 	const Problem& get_pbm() const;
 	unsigned int get_size() const;
 	double get_position(const int index) const;
+	double get_velocity(const int index) const;
+	double get_acceleration(const int index) const;
 
 	void set_current_fitness(double fit);
 	void set_mass(double acceleration);

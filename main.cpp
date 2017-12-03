@@ -92,15 +92,18 @@ void testAlgo()
   MyAlgorithm algo{prob, setup};
   algo.initialize();
 
-  cout << "première solution : " << endl;
+  cout << "premiere solution : " << endl;
   algo.afficher_best();
 
-  cout << "0        1" << endl;
+  cout << "0                                                                                                  1" << endl;
 
   algo.evolution();
 
   cout << endl << endl << "meilleure solution : " << endl;
   algo.afficher_best();
+
+  cout << endl << endl << "all solutions : " << endl;
+  algo.afficher_all();
 }
 
 

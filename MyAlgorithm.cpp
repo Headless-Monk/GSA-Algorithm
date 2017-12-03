@@ -25,59 +25,94 @@ void MyAlgorithm::evolution()
         /* chargement */
         if( ( (double)iter / (double)_setup.get_nb_evolution_steps() ) >= c)
         {
-            cout << "-";
-            c += 0.1;
+            cout << ".";
+            c += 0.01;
         }
 
+
+//cout << "-------- liste des individus ------------------------------------" << endl << endl;
+//afficher_all();
+//cout << endl;
+
+
         /* évaluation des individus */
+//cout << "-------- evalution des individus --------------------------------" << endl << endl;
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             spaceBound(_solutions[i]);
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
+        {
             _solutions[i]->fitness();
+        }
+//afficher_all();
+//cout << endl;
+
 
         /* recherche des solutuions extrémales */
+//cout << "-------- recherche des solutuions extremales --------------------" << endl << endl;
         upper_cost();
         lower_cost();
         best_cost_overall();
+//cout << "upper : " << endl << *_upper_cost << endl;
+//cout << "lower : " << endl << *_lower_cost << endl;
+//cout << "best : " << endl << *_best_Solution_overall << endl;
+
 
         /* calcul des masses*/
+//cout << "-------- calcul des masses --------------------------------------" << endl << endl;
         double mass_sum = 0;
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         {
             _solutions[i]->mass_calculation(_lower_cost, _upper_cost);
             mass_sum += _solutions[i]->get_mass();
         }
+
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->inertia_mass_calculation(mass_sum);
+//afficher_all();
+//cout << endl;
+
 
         /* calcul de g */
+//cout << "-------- calcul de g --------------------------------------------" << endl << endl;
         _g = g_evolution(iter);
 
+
         /* calcul des forces */
+//cout << "-------- calcul des forces --------------------------------------" << endl << endl;
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->total_force_calculation(_solutions, _g);
 
 
         /* calcul de l'acceleration */
+//cout << "-------- calcul de l'acceleration -------------------------------" << endl << endl;
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
             _solutions[i]->acceleration_calculation();
+//afficher_all();
+//cout << endl;
+
 
         /* mouvement des planetes */
+//cout << "-------- mouvement des planetes ---------------------------------" << endl << endl;
         for(unsigned int i=0; i<_pbm.get_dimension(); i++)
-            _solutions[i]->update_solution();
+            _solutions[i]->update_solution(); /* =_solutions[i]->initialize(); la solution finale est pas meilleure qu'un random à chaque itération */
+//afficher_all();
+//cout << endl;
+
+
+//cout << "-------- fin iteration ------------------------------------------" << endl;
+//cout << "-----------------------------------------------------------------" << endl << endl;
     }
 }
 
 void MyAlgorithm::afficher_all()
 {
     for(unsigned int i=0; i<_pbm.get_dimension(); i++)
-        std::cout << *_solutions[i] << std::endl;
-    std::cout << "--------------------------------------" << std::endl;
+        cout << *_solutions[i] << endl;
 }
 
 void MyAlgorithm::afficher_best()
 {
-    std::cout << *_best_Solution_overall << std::endl;
+    cout << *_best_Solution_overall << endl;
 }
 
 void MyAlgorithm::spaceBound(Solution *sol)
@@ -88,8 +123,8 @@ void MyAlgorithm::spaceBound(Solution *sol)
 
 double MyAlgorithm::g_evolution(int iter)
 {
-    double g0 = 100;
-    double alpha = 20;
+    double g0 = 1;
+    double alpha = 1000;
 
     return g0*exp(-alpha*iter/_setup.get_nb_evolution_steps());
 }
@@ -118,6 +153,7 @@ void MyAlgorithm::lower_cost()
         if(_solutions[i]->get_current_fitness() < _lower_cost->get_current_fitness())
             _lower_cost = _solutions[i];
 }
+
 
 void MyAlgorithm::best_cost_overall()
 {

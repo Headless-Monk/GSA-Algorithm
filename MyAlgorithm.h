@@ -29,7 +29,7 @@ public:
 	void afficher_all();
 
 	/*
-	* A FAIE
+	* A FAIRE
 	*/
 
 
@@ -61,8 +61,6 @@ private:
 	double _g;
 	Solution *_best_Solution_overall;
 	int _iterations;
-
-	//std::vector<struct Particle> _fitness_values;
 };
 
 #endif

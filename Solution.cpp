@@ -5,13 +5,20 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm},  _mass{0}, _velocity{}, _acceleration{}
+        _pbm{pbm}, _position{}, _current_fitness{0}, _mass{0}, _inertia_mass{0},
+        _total_force{}, _velocity{}, _acceleration{}
 {
     _acceleration.reserve(_pbm.get_dimension());
-    _acceleration.resize(_pbm.get_dimension());
+    _acceleration.resize(_pbm.get_dimension(), 0);
 
     _velocity.reserve(_pbm.get_dimension());
-    _velocity.resize(_pbm.get_dimension());
+    _velocity.resize(_pbm.get_dimension(), 0);
+
+    _position.reserve(_pbm.get_dimension());
+    _position.resize(_pbm.get_dimension(), 0);
+
+    _total_force.reserve(_pbm.get_dimension());
+    _total_force.resize(_pbm.get_dimension(), 0);
 }
 
 Solution::~Solution()
@@ -19,7 +26,6 @@ Solution::~Solution()
 
 void Solution::initialize()
 {
-    _position.resize(_pbm.get_dimension());
     for(unsigned int i=0; i<_position.size(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
 }
@@ -34,6 +40,11 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 {
     if(minFit->_current_fitness == maxFit->_current_fitness)
         _mass = 1;
+    else if( (_current_fitness == minFit->_current_fitness && _pbm.get_direction() == 0)
+          || (_current_fitness == maxFit->_current_fitness && _pbm.get_direction() == 1) )
+    {
+             _mass = 0.0001; //normalement _mass vaut 0, mais après on divise par _mass et erreur nan
+    }
     else
     {
         double best, worst;
@@ -69,9 +80,6 @@ void Solution::force_calculation(Solution *Sol, double g, vector<double> &force)
 
 void Solution::total_force_calculation(std::vector<Solution*> &v, double g)
 {
-    _total_force.reserve(_pbm.get_dimension());
-    _total_force.resize(30,0);
-
     for(unsigned int j = 0; j < v.size(); j++)
     {
         vector<double> force{};
@@ -83,11 +91,16 @@ void Solution::total_force_calculation(std::vector<Solution*> &v, double g)
 void Solution::acceleration_calculation()
 {
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
+    {
         _acceleration[i] = (_total_force[i]/_inertia_mass);
+    }
 }
 
 
-
+/*
+* la vitesse reste trop forte meme sur les dernières itérations, les planètes n'arrivent pas
+* a se stabiliser
+*/
 void Solution::update_solution()
 {
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
@@ -196,6 +209,11 @@ double Solution::get_mass() const
     return _mass;
 }
 
+double Solution::get_inertia_mass() const
+{
+    return _inertia_mass;
+}
+
 unsigned int Solution::get_size() const
 {
     return _position.size();
@@ -204,6 +222,16 @@ unsigned int Solution::get_size() const
 double Solution::get_position(const int index) const
 {
     return _position[index];
+}
+
+double Solution::get_velocity(const int index) const
+{
+    return _velocity[index];
+}
+
+double Solution::get_acceleration(const int index) const
+{
+    return _acceleration[index];
 }
 
 /* SETTER */
@@ -228,10 +256,20 @@ void Solution::set_position(const int index, const double val)
 
 std::ostream& operator<<(std::ostream& os, const Solution& sol)
 {
-    //os << "Velocite         : " << sol.get_velocity() << endl;
-    //os << "Acceleration     : " << sol.get_acceleration() << endl;
-    //os << "Masse            : " << sol.get_mass() << endl;
+    os << "Velocite         : ";
+    for(unsigned int i=0; i<sol.get_size(); i++)
+        os << sol.get_velocity(i) << " ";
+    os << endl;
+
+    os << "Acceleration     : " ;
+    for(unsigned int i=0; i<sol.get_size(); i++)
+        os << sol.get_acceleration(i) << " ";
+    os << endl;
+
+    os << "Masse            : " << sol.get_mass() << endl;
+    os << "Masse inertielle : " << sol.get_inertia_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
+
     os << "Positions        : ";
     for(unsigned int i=0; i<sol.get_size(); i++)
         os << sol.get_position(i) << " ";
