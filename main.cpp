@@ -84,26 +84,92 @@ void testMass()
   cout << "mass 3 : " << sol3.get_mass() << endl;*/
 }
 
+unsigned benchmark = 1 ;
+SetUpParams setup;
+
 void testAlgo()
 {
-  Problem prob{1};
-  SetUpParams setup{};
+    // cout << " benchmark : "<< benchmark <<endl ;
+    // cout << "boucle : "setup.get_independent_runs() <<endl ;
 
-  MyAlgorithm algo{prob, setup};
-  algo.initialize();
+    Problem prob{benchmark};
 
-  cout << "premiere solution : " << endl;
-  algo.afficher_best();
+    MyAlgorithm algo{prob, setup};
+    algo.initialize();
 
-  cout << "0                                                                                               100%" << endl;
+    cout << "premiere solution : " << endl;
+    algo.afficher_best();
 
-  algo.evolution();
+    cout << "0                                                                                               100%" << endl;
 
-  cout << endl << endl << "meilleure solution : " << endl;
-  algo.afficher_best();
+    algo.evolution();
 
-  cout << endl << endl << "all solutions : " << endl;
-  algo.afficher_all();
+    cout << endl << endl << "meilleure solution : " << endl;
+    algo.afficher_best();
+
+    cout << endl << endl << "all solutions : " << endl;
+    algo.afficher_all();
+}
+
+bool fin(int a)
+{
+    cout << "(1) Nombre de planètes" << endl; // solution
+    cout << "(2) Nombre d'évolutions " << endl; // evolution
+    cout << "(3) Nombre de dimensions" << endl; // population
+    cout << "(4) Nombre de boucles" << endl; // independant run
+    cout << "(5) Choix du benchmark" << endl;
+    cout << "(6) Paramètres par défaut" << endl;
+    if(a==0)cout << "(7) Quitter" << endl;
+    else cout << "(7) Lancer l'algorithme" << endl;
+
+    int choix ;
+    cin >>choix ;
+
+    switch ( choix ) {
+    case 1:
+        cout << "Saisir le nombre de planètes : " ;
+        cin >> choix ;
+        setup.set_solution_size(5);
+    break;
+    case 2:
+        cout << "Saisir le nombre d'évolutions : " ;
+        cin >> choix ;
+        setup.set_nb_evolution_steps(choix);
+    break;
+    case 3:
+        cout << "Saisir le nombre de dimensions : " ;
+        cin >> choix ;
+        setup.set_population_size(choix);
+    break;
+    case 4:
+        cout << "Saisir le nombre de boucles : " ;
+        cin >> choix ;
+        setup.set_independent_runs(choix);
+    break;
+    case 5:
+        cout << " --> Rosenbrock (1) "<<endl;
+        cout << " --> Rastrigin (2) "<<endl;
+        cout << " --> Ackley (3) "<<endl;
+        cout << " --> Schwefel (4) "<<endl;
+        cout << " --> Schaffer (5) "<<endl;
+        cout << " --> Weierstrass (6) "<<endl;
+
+        cin >> choix;
+        benchmark = choix;
+
+    break;
+    case 6:
+        return false ;
+    break;
+    case 7:
+        return true;
+    break;
+    }
+
+    if (!fin(1))
+    {
+        return false;
+    }
 }
 
 
@@ -114,7 +180,12 @@ int main()
     //testProblem();
     //testSolution();
     //testMass();
-    testAlgo();
 
+    while (!fin(0))
+    {
+        testAlgo();
+    }
   return 0;
 }
+
+
