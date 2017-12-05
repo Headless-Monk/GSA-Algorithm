@@ -95,7 +95,7 @@ void testAlgo()
   cout << "premiere solution : " << endl;
   algo.afficher_best();
 
-  cout << "0                                                                                                  1" << endl;
+  cout << "0                                                                                               100%" << endl;
 
   algo.evolution();
 

@@ -25,7 +25,7 @@ void MyAlgorithm::evolution()
         /* chargement */
         if( ( (double)iter / (double)_setup.get_nb_evolution_steps() ) >= c)
         {
-            cout << ".";
+            cout << (char)219u;
             c += 0.01;
         }
 
@@ -153,7 +153,6 @@ void MyAlgorithm::lower_cost()
         if(_solutions[i]->get_current_fitness() < _lower_cost->get_current_fitness())
             _lower_cost = _solutions[i];
 }
-
 
 void MyAlgorithm::best_cost_overall()
 {
