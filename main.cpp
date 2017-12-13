@@ -101,7 +101,11 @@ void testAlgo()
     algo.afficher_best();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     cout << "0                                                                                               100%" << endl;
+=======
+  cout << "0                                                                                                  1" << endl;
+>>>>>>> parent of 80ee7d4... modification de la barre de chargement swaag
 =======
   cout << "0                                                                                                  1" << endl;
 >>>>>>> parent of 80ee7d4... modification de la barre de chargement swaag
