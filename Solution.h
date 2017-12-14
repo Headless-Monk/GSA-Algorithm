@@ -25,9 +25,7 @@ public:
 	//bool operator!= (const Solution& sol) const;
 
 	void update_solution();
-	void force_calculation(Solution *Sol, double g, vector<double> &force);
-	void total_force_calculation(std::vector<Solution*> &v, double g);
-	void acceleration_calculation();
+	void acceleration_calculation(std::vector<Solution*> &v, double g);
 	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
 	void mass_calculation(const Solution *minFit, const Solution *maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
 	void fitness();

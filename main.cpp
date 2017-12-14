@@ -84,16 +84,16 @@ void testMass()
   cout << "mass 3 : " << sol3.get_mass() << endl;*/
 }
 
-unsigned benchmark = 1 ;
-SetUpParams setup;
+//unsigned benchmark = 1 ;
+//SetUpParams setup;
 
-void testAlgo()
+void testAlgo(int pbm)
 {
     // cout << " benchmark : "<< benchmark <<endl ;
     // cout << "boucle : "setup.get_independent_runs() <<endl ;
 
-    Problem prob{benchmark};
-
+    Problem prob{pbm};
+    SetUpParams setup{};
     MyAlgorithm algo{prob, setup};
     algo.initialize();
 
@@ -113,7 +113,7 @@ void testAlgo()
 
 bool fin(int a)
 {
-    cout << "(1) Nombre de planètes" << endl; // solution
+   /* cout << "(1) Nombre de planètes" << endl; // solution
     cout << "(2) Nombre d'évolutions " << endl; // evolution
     cout << "(3) Nombre de dimensions" << endl; // population
     cout << "(4) Nombre de boucles" << endl; // independant run
@@ -169,7 +169,8 @@ bool fin(int a)
     if (!fin(1))
     {
         return false;
-    }
+    }*/
+    return false;
 }
 
 
@@ -181,10 +182,10 @@ int main()
     //testSolution();
     //testMass();
 
-    while (!fin(0))
-    {
-        testAlgo();
-    }
+    //while (!fin(0))
+   // {
+    testAlgo(1);
+    //}
   return 0;
 }
 

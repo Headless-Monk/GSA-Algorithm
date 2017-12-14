@@ -2,8 +2,8 @@
 
 
 SetUpParams::SetUpParams():
-    _independent_runs{30}, _nb_evolution_steps{100},
-    _population_size{30}, _solution_size{30}
+    _independent_runs{30}, _nb_evolution_steps{2000000},
+    _population_size{10}, _solution_size{30} //solution size inutilisée
 {}
 
 SetUpParams::~SetUpParams()

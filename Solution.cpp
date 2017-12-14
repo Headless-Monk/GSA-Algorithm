@@ -26,7 +26,7 @@ Solution::~Solution()
 
 void Solution::initialize()
 {
-    for(unsigned int i=0; i<_position.size(); i++)
+    for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
 }
 
@@ -63,44 +63,37 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
-void Solution::force_calculation(Solution *Sol, double g, vector<double> &force)
+void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
 {
-    double distance;
-    force.reserve(_pbm.get_dimension());
+    for(unsigned int i=0; i<_pbm.get_dimension(); i++)
+        _acceleration[i] = 0;
 
-    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
+    double e = 1.0;
+	while (1.0 + e / 2.0 > 1.0)
+	{
+		e /= 2.0;
+	}
+
+    for(unsigned int j=0; j<v.size(); j++)
     {
-        distance += pow(Sol->_position[i] - _position[i], 2);
-    }
-    distance = sqrt(distance);
+        if(this != v[j])
+        {
+            double distance = 0;
+            for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
+            {
+                distance += pow(v[j]->_position[i] - _position[i], 2);
+            }
+            distance = sqrt(distance);
 
-    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
-        force.push_back(g*((_mass*Sol->_mass)/distance)*(_position[i]-Sol->_position[i]));
-}
-
-void Solution::total_force_calculation(std::vector<Solution*> &v, double g)
-{
-    for(unsigned int j = 0; j < v.size(); j++)
-    {
-        vector<double> force{};
-        force_calculation(v[j], g, force);
-        _total_force[j] += ((double)rand() / RAND_MAX) * force[j];
-    }
-}
-
-void Solution::acceleration_calculation()
-{
-    for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
-    {
-        _acceleration[i] = (_total_force[i]/_inertia_mass);
+            for(unsigned int k=0; k<_pbm.get_dimension(); k++)
+            {
+                double r = ((double)rand() / RAND_MAX);
+                _acceleration[k] += ( (r * g * v[j]->_mass * (v[j]->_position[k] - _position[k])) / (distance + e) );
+            }
+        }
     }
 }
 
-
-/*
-* la vitesse reste trop forte meme sur les dernières itérations, les planètes n'arrivent pas
-* a se stabiliser
-*/
 void Solution::update_solution()
 {
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
@@ -128,7 +121,7 @@ void Solution::fitness()
     switch(_pbm.get_num_pbm())
     {
       case 1 : //Rosenbrock
-        for(unsigned int i=0; i<_position.size()-1; i++)
+        for(unsigned int i=0; i<_pbm.get_dimension()-1; i++)
         {
             sum += pow(100 * (_position[i+1] - pow(_position[i], 2)), 2) + pow(_position[i]-1, 2);
         }
@@ -137,8 +130,8 @@ void Solution::fitness()
         break;
 
       case 2 : //Rastrigin
-        sum = 10 * _position.size();
-        for(unsigned int i=0; i<_position.size(); i++)
+        sum = 10 * _pbm.get_dimension();
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         {
             sum += pow(_position[i], 2) - 10*cos(2*M_PI*_position[i]);
         }
@@ -147,29 +140,29 @@ void Solution::fitness()
         break;
 
       case 3 : //Ackley
-        for(unsigned int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         {
             tmp1 += pow(_position[i], 2);
         }
 
-        for(unsigned int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         {
             tmp2 += cos(2*M_PI*_position[i]);
         }
 
-        sum += -20 * exp(-0.2 * sqrt((1./_position.size())*tmp1));
-        sum -= exp((1./_position.size())*tmp2);
+        sum += -20 * exp(-0.2 * sqrt((1./_pbm.get_dimension())*tmp1));
+        sum -= exp((1./_pbm.get_dimension())*tmp2);
         sum += 20 + exp(1);
 
         _current_fitness = sum;
         break;
 
       case 4 : //Schwefel
-        for(unsigned int i=0; i<_position.size(); i++)
+        for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         {
             tmp1 += _position[i] * sin(sqrt(abs(_position[i])));
         }
-        sum += 418.9829 * _position.size() - tmp1 ;
+        sum += 418.9829 * _pbm.get_dimension() - tmp1 ;
 
         _current_fitness = sum;
         break;
