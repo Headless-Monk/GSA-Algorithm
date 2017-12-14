@@ -2,8 +2,7 @@
 
 
 SetUpParams::SetUpParams():
-    _independent_runs{30}, _nb_evolution_steps{2000000},
-    _population_size{10}, _solution_size{30} //solution size inutilisée
+    _nb_evolution_steps{2000000}, _population_size{10}
 {}
 
 SetUpParams::~SetUpParams()
@@ -11,10 +10,8 @@ SetUpParams::~SetUpParams()
 
 std::ostream& operator<<(std::ostream& os, const SetUpParams& setup)
 {
-    os << "independant runs :   " << setup._independent_runs << std::endl;
     os << "nb evolution steps : " << setup._nb_evolution_steps << std::endl;
     os << "population size :    " << setup._population_size << std::endl;
-    os << "solution size :      " << setup._solution_size << std::endl;
 
     return os;
 }
@@ -25,43 +22,25 @@ std::istream& operator>> (std::istream& is, SetUpParams& setup)
     unsigned int val;
 
     is >> c >> val;
-    setup.set_independent_runs(val);
-
-    is >> c >> val;
     setup.set_nb_evolution_steps(val);
 
     is >> c >> val;
     setup.set_population_size(val);
-
-    is >> c >> val;
-    setup.set_solution_size(val);
 
     return is;
 }
 
 void SetUpParams::edit_params()
 {
-    std::cout << "(independent_runs;nb_evolution_steps;population_size;solution_size)" << std::endl;
+    std::cout << "(nb_evolution_steps;population_size)" << std::endl;
     std::cin >> *this;
 }
-
-const unsigned int SetUpParams::get_independent_runs() const
-{ return _independent_runs; }
 
 const unsigned int SetUpParams::get_nb_evolution_steps() const
 { return _nb_evolution_steps; }
 
 const unsigned int SetUpParams::get_population_size() const
 { return _population_size; }
-
-const unsigned int SetUpParams::get_solution_size() const
-{ return _solution_size; }
-
-void SetUpParams::set_independent_runs(const unsigned int val)
-{
-    if(val >= 0)
-        _independent_runs = val;
-}
 
 void SetUpParams::set_nb_evolution_steps(const unsigned int val)
 {
@@ -73,10 +52,4 @@ void SetUpParams::set_population_size(const unsigned int val)
 {
     if(val >= 0)
         _population_size = val;
-}
-
-void SetUpParams::set_solution_size(const unsigned int val)
-{
-    if(val >= 0)
-        _solution_size = val;
 }

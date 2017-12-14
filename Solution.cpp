@@ -63,6 +63,7 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
+/* GSA::calcAcceleration */
 void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
 {
     for(unsigned int i=0; i<_pbm.get_dimension(); i++)

@@ -1,3 +1,10 @@
+#include "afficheur.h"
+
+
+/*
+
+
+
 #include <iostream>
 #include <ctime>
 
@@ -55,7 +62,7 @@ void testSolution()
 
 void testMass()
 {
-  /*Problem prob{1};
+  Problem prob{1};
 
   Solution sol1{prob};
   Solution sol2{prob};
@@ -81,7 +88,7 @@ void testMass()
   sol2.mass_calculation(sol1, sol3);
   cout << "mass 2 : " << sol2.get_mass() << endl;
   sol3.mass_calculation(sol1, sol3);
-  cout << "mass 3 : " << sol3.get_mass() << endl;*/
+  cout << "mass 3 : " << sol3.get_mass() << endl;
 }
 
 //unsigned benchmark = 1 ;
@@ -113,7 +120,7 @@ void testAlgo(int pbm)
 
 bool fin(int a)
 {
-   /* cout << "(1) Nombre de planètes" << endl; // solution
+    cout << "(1) Nombre de planètes" << endl; // solution
     cout << "(2) Nombre d'évolutions " << endl; // evolution
     cout << "(3) Nombre de dimensions" << endl; // population
     cout << "(4) Nombre de boucles" << endl; // independant run
@@ -169,23 +176,16 @@ bool fin(int a)
     if (!fin(1))
     {
         return false;
-    }*/
+    }
     return false;
 }
 
-
+*/
 int main()
 {
-    srand(time(NULL));
-    //testSetUpParam();
-    //testProblem();
-    //testSolution();
-    //testMass();
+    afficheur a{};
+    a.init();
 
-    //while (!fin(0))
-   // {
-    testAlgo(1);
-    //}
   return 0;
 }
 

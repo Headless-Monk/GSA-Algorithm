@@ -1,9 +1,9 @@
 #include "MyAlgorithm.h"
 
-MyAlgorithm::MyAlgorithm(const Problem& pbm, const SetUpParams& setup):
+MyAlgorithm::MyAlgorithm(Problem& pbm, SetUpParams& setup):
     _solutions{}, _pbm{pbm}, _setup{setup}, _best_Solution_overall{nullptr}
 {
-    for(unsigned int i = 0; i < _setup.get_population_size(); i++) //créer par rapport a solution size, pas dimention
+    for(unsigned int i = 0; i < _setup.get_population_size(); i++)
         _solutions.push_back(new Solution{_pbm});
 
     _best_Solution_overall = new Solution{_pbm};
@@ -160,4 +160,22 @@ void MyAlgorithm::best_cost_overall()
         if(_lower_cost->get_current_fitness() < _best_Solution_overall->get_current_fitness())
             *_best_Solution_overall = *_lower_cost;
     }
+}
+
+void MyAlgorithm::change_parameters(SetUpParams &setup, Problem &pbm)
+{
+    _setup = setup;
+    _pbm = pbm;
+
+    for(unsigned int i = 0; i < _solutions.size(); i++)
+        delete _solutions[i];
+    _solutions.resize(0);
+    for(unsigned int i = 0; i < _setup.get_population_size(); i++)
+        _solutions.push_back(new Solution{_pbm});
+
+    _upper_cost = nullptr;
+    _lower_cost = nullptr;
+    _g = 0;
+    delete _best_Solution_overall;
+    _best_Solution_overall = new Solution{_pbm};
 }

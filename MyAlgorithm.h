@@ -12,7 +12,7 @@ class Problem;
 class MyAlgorithm
 {
 public:
-	MyAlgorithm(const Problem& pbm, const SetUpParams& setup);
+	MyAlgorithm(Problem& pbm, SetUpParams& setup);
 	~MyAlgorithm();
 
 	/*
@@ -52,15 +52,14 @@ public:
 	//Solution& average_solution() const;
 	//Solution& worst_solution() const;
 
-
+    void change_parameters(SetUpParams &setup, Problem &pbm);
 private:
 	std::vector<Solution*> _solutions;     // individuals in population
-	const Problem &_pbm;
-	const SetUpParams &_setup;
+	Problem &_pbm;
+	SetUpParams &_setup;
 	Solution *_upper_cost, *_lower_cost; // lower and upper fitness of individuals in population
 	double _g;
 	Solution *_best_Solution_overall;
-	int _iterations;
 };
 
 #endif
