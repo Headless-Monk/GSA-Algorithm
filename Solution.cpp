@@ -40,11 +40,6 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 {
     if(minFit->_current_fitness == maxFit->_current_fitness)
         _mass = 1;
-    else if( (_current_fitness == minFit->_current_fitness && _pbm.get_direction() == 0)
-          || (_current_fitness == maxFit->_current_fitness && _pbm.get_direction() == 1) )
-    {
-             _mass = 0.0001; //normalement _mass vaut 0, mais après on divise par _mass et erreur nan
-    }
     else
     {
         double best, worst;
