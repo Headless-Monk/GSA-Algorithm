@@ -1,4 +1,6 @@
 #include "MyAlgorithm.h"
+#include <fstream>
+#include <iostream>
 
 MyAlgorithm::MyAlgorithm(Problem& pbm, SetUpParams& setup):
     _solutions{}, _pbm{pbm}, _setup{setup}, _best_Solution_overall{nullptr}
@@ -20,11 +22,15 @@ MyAlgorithm::~MyAlgorithm()
 void MyAlgorithm::evolution()
 {
     double c = 0.0;
+    std::ofstream fichier("sortie.csv", ios::out);  // on ouvre le fichier en lecture
     for(unsigned int iter=0; iter<_setup.get_nb_evolution_steps(); iter++)
-    {
+    {	
         /* chargement */
+        if(iter%1000 == 0)fichier << _best_Solution_overall->get_current_fitness() << "," << iter <<"\n";
+        
         if( ( (double)iter / (double)_setup.get_nb_evolution_steps() ) >= c)
         {
+        	
             cout << (char)219u;
             c += 0.01;
         }
@@ -116,8 +122,8 @@ void MyAlgorithm::spaceBound(Solution *sol)
 
 double MyAlgorithm::g_evolution(int iter)
 {
-    double g0 = 1;
-    double alpha = 9;
+    double g0 = 100;
+    double alpha = 20;
 
     return g0*exp(-alpha*iter/_setup.get_nb_evolution_steps());
 }
