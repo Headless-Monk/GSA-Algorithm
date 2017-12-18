@@ -2,7 +2,7 @@
 
 
 SetUpParams::SetUpParams():
-    _nb_evolution_steps{2000000}, _population_size{30}
+    _nb_evolution_steps{66667}, _population_size{30}
 {}
 
 SetUpParams::~SetUpParams()
