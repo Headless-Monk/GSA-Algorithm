@@ -5,7 +5,7 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm}, _position{}, _current_fitness{0}, _mass{0}, _inertia_mass{0},
+        _pbm{pbm}, _position{}, _current_fitness{0}, _mass{0},
         _total_force{}, _velocity{}, _acceleration{}
 {
     _acceleration.reserve(_pbm.get_dimension());
@@ -24,18 +24,22 @@ Solution::Solution(const Problem& pbm):
 Solution::~Solution()
 {}
 
+/**
+  Initialise la position de toutes les solutions avec un nombre aléatoire compris entre les bornes du problème
+	@param[out] position - Vecteurs position
+*/
 void Solution::initialize()
 {
     for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
 }
 
-void Solution::inertia_mass_calculation(double mass_sum)
-{
-    _inertia_mass = _mass / mass_sum;
-}
-
-
+/**
+  Calcule la masse gravitationnelle d'une planète en fonction de la fitness maximale et minimale
+	@param[in] *minFit - Un pointeur sur la fitness minimale de la solution
+	@param[in] *maxFit - Un pointeur sur la fitness maximale de la solution
+	@param[out] mass - La masse gravitationnelle de la solution
+*/
 void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 {
     if(minFit->_current_fitness == maxFit->_current_fitness)
@@ -58,7 +62,11 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
-/* GSA::calcAcceleration */
+/**
+  Calcule l'accéleration d'une solution
+	@param[in] v - Vecteur de pointeur sur Solution
+	@param[in] g - Constance gravitationnelle
+*/
 void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
 {
     for(unsigned int i=0; i<_pbm.get_dimension(); i++)
@@ -90,6 +98,11 @@ void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
     }
 }
 
+/**
+  Met à jour la vélocité et la position en fonction des valeurs précédentes et de l'acc
+	@param[in] v - Vecteur de pointeur sur Solution
+	@param[in] g - Constance gravitationnelle
+*/
 void Solution::update_solution()
 {
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
@@ -198,11 +211,6 @@ double Solution::get_mass() const
     return _mass;
 }
 
-double Solution::get_inertia_mass() const
-{
-    return _inertia_mass;
-}
-
 unsigned int Solution::get_size() const
 {
     return _position.size();
@@ -256,7 +264,6 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     os << endl;
 
     os << "Masse            : " << sol.get_mass() << endl;
-    os << "Masse inertielle : " << sol.get_inertia_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
 
     os << "Positions        : ";
@@ -311,7 +318,6 @@ Solution& Solution::operator=(const Solution &sol)
     _position = sol._position;
     _current_fitness = sol._current_fitness;
     _mass = sol._mass;
-    _inertia_mass = sol._inertia_mass;
     _total_force = sol._total_force;
     _velocity = sol._velocity;
     _acceleration = sol._acceleration;

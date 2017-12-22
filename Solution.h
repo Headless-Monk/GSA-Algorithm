@@ -26,7 +26,6 @@ public:
 
 	void update_solution();
 	void acceleration_calculation(std::vector<Solution*> &v, double g);
-	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
 	void mass_calculation(const Solution *minFit, const Solution *maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
 	void fitness();
 	void initialize(); //randomize agents positions
@@ -36,7 +35,6 @@ public:
 
 	double get_current_fitness() const;
 	double get_mass() const;
-	double get_inertia_mass() const;
 	const Problem& get_pbm() const;
 	unsigned int get_size() const;
 	double get_position(const int index) const;
@@ -54,7 +52,6 @@ private:
     std::vector<double> _position;
     double _current_fitness;
     double _mass; // best=1 ; worst=0
-    double _inertia_mass;
     vector<double> _total_force;
 
     vector<double> _velocity;

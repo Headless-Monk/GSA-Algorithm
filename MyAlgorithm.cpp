@@ -71,9 +71,6 @@ void MyAlgorithm::evolution()
             _solutions[i]->mass_calculation(_lower_cost, _upper_cost);
             mass_sum += _solutions[i]->get_mass();
         }
-
-        for(unsigned int i=0; i<_setup.get_population_size(); i++)
-            _solutions[i]->inertia_mass_calculation(mass_sum);
 //afficher_all();
 //cout << endl;
 
