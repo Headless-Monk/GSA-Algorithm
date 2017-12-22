@@ -101,16 +101,19 @@ void afficheur::afficher_menu_eddit()
                 cout << "Saisir le nombre d'évolutions : " ;
                 cin >> choix ;
                 _setup.set_nb_evolution_steps(choix);
+                _setup.update_nb_independant_runs();
                 break;
             case 2:
                 cout << "Saisir le nombre de planètes : " ;
                 cin >> choix ;
                 _setup.set_population_size(choix);
+                _setup.update_nb_independant_runs();
                 break;
             case 3:
                 cout << "Saisir le nombre de dimensions : " ;
                 cin >> choix ;
                 _pbm.set_dimension(choix);
+                _setup.update_nb_independant_runs();
                 break;
             case 4:
                 cout << " --> Rosenbrock (1) "<<endl;

@@ -32,7 +32,6 @@ public:
 	* A FAIRE
 	*/
 
-
 	//friend std::ostream& operator<< (std::ostream& os, const MyAlgorithm& myAlgo);
 	//friend std::istream& operator>> (std::istream& is, MyAlgorithm& myAlgo);
 	//MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
