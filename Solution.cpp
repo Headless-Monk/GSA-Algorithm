@@ -5,20 +5,18 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm}, _position{}, _current_fitness{0}, _mass{0},
-        _total_force{}, _velocity{}, _acceleration{}
+        _pbm{pbm},
+        _position{}, _velocity{}, _acceleration{},
+        _current_fitness{0}, _mass{0}
 {
+    _position.reserve(_pbm.get_dimension());
+    _position.resize(_pbm.get_dimension(), 0);
+
     _acceleration.reserve(_pbm.get_dimension());
     _acceleration.resize(_pbm.get_dimension(), 0);
 
     _velocity.reserve(_pbm.get_dimension());
     _velocity.resize(_pbm.get_dimension(), 0);
-
-    _position.reserve(_pbm.get_dimension());
-    _position.resize(_pbm.get_dimension(), 0);
-
-    _total_force.reserve(_pbm.get_dimension());
-    _total_force.resize(_pbm.get_dimension(), 0);
 }
 
 Solution::~Solution()
@@ -194,6 +192,16 @@ void Solution::fitness()
     }
 }
 
+void Solution::add_position(double sol)
+{
+    _position.push_back(sol);
+}
+
+void Solution::delete_position()
+{
+    _position.pop_back();
+}
+
 /* GETTER */
 
 const Problem& Solution::get_pbm() const
@@ -253,72 +261,16 @@ void Solution::set_position(const int index, const double val)
 
 std::ostream& operator<<(std::ostream& os, const Solution& sol)
 {
-    os << "Velocite         : ";
-    for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_velocity(i) << " ";
-    os << endl;
-
-    os << "Acceleration     : " ;
-    for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_acceleration(i) << " ";
-    os << endl;
-
-    os << "Masse            : " << sol.get_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
-
-    os << "Positions        : ";
-    for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_position(i) << " ";
-    os << endl;
 
     return os;
  }
-
-std::istream&  operator>>(std::istream& is, Solution& sol)
-{
-    /*
-    cout << "Entrez les valeurs sous la forme (velocite;acceleration;masse;fitness)" << endl;
-
-    char c;
-    double tmp;
-    is >> c;
-
-    is >> tmp;
-        sol.set_velocity(tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_acceleration(tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_mass(tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_current_fitness(tmp);
-    is >> c;
-    */
-
-    return is;
-}
-
-void Solution::add_position(double sol)
-{
-    _position.push_back(sol);
-}
-
-void Solution::delete_position()
-{
-    _position.pop_back();
-}
 
 Solution& Solution::operator=(const Solution &sol)
 {
     _position = sol._position;
     _current_fitness = sol._current_fitness;
     _mass = sol._mass;
-    _total_force = sol._total_force;
     _velocity = sol._velocity;
     _acceleration = sol._acceleration;
 

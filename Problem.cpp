@@ -45,15 +45,14 @@ Problem::Problem(int num): _num_pbm{num}
       _nom_pbm = "Weierstrass";
       _LowerLimit = -2;
       _UpperLimit = 2;
-      _dimension = 1; //à vérifier
-      _direction = 1; //à vérifier
+      _dimension = 1;
+      _direction = 1;
       break;
   }
 }
 
 Problem::~Problem()
-{
-}
+{}
 
 /*
 SETTER
