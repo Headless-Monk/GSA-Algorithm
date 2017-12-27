@@ -4,7 +4,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-afficheur::afficheur() : _pbm{1}, _setup{}, _algo{_pbm, _setup}
+afficheur::afficheur() : _pbm(1), _setup(), _algo(_pbm, _setup)
 {
     srand(time(NULL));
 }
@@ -17,7 +17,7 @@ void afficheur::init()
     int choix = 0;
     while(choix != 3)
     {
-        system("cls");
+        cout << endl;
 
         afficher_pbm();
         afficher_menu_principal();
@@ -54,7 +54,7 @@ void afficheur::afficher_menu_principal()
 
 void afficheur::start_resolution()
 {
-    system("cls");
+    cout << endl;
 
     _algo.initialize();
     cout << _pbm.get_nom_pbm() << ", premiere solution : " << endl;
@@ -86,7 +86,7 @@ void afficheur::afficher_menu_eddit()
     int choix = 0;
     while(choix != 5)
     {
-        system("cls");
+        cout << endl;
 
         cout << "(1) Nombre d'evolutions " << endl; // evolution
         cout << "(2) Nombre de planetes" << endl; // population
@@ -98,19 +98,22 @@ void afficheur::afficher_menu_eddit()
         switch ( choix )
         {
             case 1:
-                cout << "Saisir le nombre d'évolutions : " ;
+                cout << "Saisir le nombre d'evolutions : " ;
                 cin >> choix ;
                 _setup.set_nb_evolution_steps(choix);
+                _setup.update_nb_independant_runs();
                 break;
             case 2:
-                cout << "Saisir le nombre de planètes : " ;
+                cout << "Saisir le nombre de planetes : " ;
                 cin >> choix ;
                 _setup.set_population_size(choix);
+                _setup.update_nb_independant_runs();
                 break;
             case 3:
                 cout << "Saisir le nombre de dimensions : " ;
                 cin >> choix ;
                 _pbm.set_dimension(choix);
+                _setup.update_nb_independant_runs();
                 break;
             case 4:
                 cout << " --> Rosenbrock (1) "<<endl;
@@ -121,7 +124,7 @@ void afficheur::afficher_menu_eddit()
                 cout << " --> Weierstrass (6) "<<endl;
 
                 cin >> choix;
-                _pbm = Problem{choix};
+                _pbm = Problem(choix);
                 break;
             case 5:
                 _algo.change_parameters(_setup, _pbm);

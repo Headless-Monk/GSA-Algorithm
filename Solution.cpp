@@ -5,46 +5,43 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm}, _position{}, _current_fitness{0}, _mass{0}, _inertia_mass{0},
-        _total_force{}, _velocity{}, _acceleration{}
+        _pbm(pbm),
+        _position(), _velocity(), _acceleration(),
+        _current_fitness(0), _mass(0)
 {
+    _position.reserve(_pbm.get_dimension());
+    _position.resize(_pbm.get_dimension(), 0);
+
     _acceleration.reserve(_pbm.get_dimension());
     _acceleration.resize(_pbm.get_dimension(), 0);
 
     _velocity.reserve(_pbm.get_dimension());
     _velocity.resize(_pbm.get_dimension(), 0);
-
-    _position.reserve(_pbm.get_dimension());
-    _position.resize(_pbm.get_dimension(), 0);
-
-    _total_force.reserve(_pbm.get_dimension());
-    _total_force.resize(_pbm.get_dimension(), 0);
 }
 
 Solution::~Solution()
 {}
 
+/**
+  Initialise la position de toutes les solutions avec un nombre aléatoire compris entre les bornes du problème
+	@param[out] position - Vecteurs position
+*/
 void Solution::initialize()
 {
     for(unsigned int i=0; i<_pbm.get_dimension(); i++)
         _position[i] = ( (double)rand() / RAND_MAX ) * ( _pbm.get_UpperLimit() - _pbm.get_LowerLimit() ) + _pbm.get_LowerLimit();
 }
 
-void Solution::inertia_mass_calculation(double mass_sum)
-{
-    _inertia_mass = _mass / mass_sum;
-}
-
-
+/**
+  Calcule la masse gravitationnelle d'une planète en fonction de la fitness maximale et minimale
+	@param[in] *minFit - Un pointeur sur la fitness minimale de la solution
+	@param[in] *maxFit - Un pointeur sur la fitness maximale de la solution
+	@param[out] mass - La masse gravitationnelle de la solution
+*/
 void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 {
     if(minFit->_current_fitness == maxFit->_current_fitness)
         _mass = 1;
-    else if( (_current_fitness == minFit->_current_fitness && _pbm.get_direction() == 0)
-          || (_current_fitness == maxFit->_current_fitness && _pbm.get_direction() == 1) )
-    {
-             _mass = 0.0001; //normalement _mass vaut 0, mais aprÃ¨s on divise par _mass et erreur nan
-    }
     else
     {
         double best, worst;
@@ -63,7 +60,11 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
-/* GSA::calcAcceleration */
+/**
+  Calcule l'accéleration d'une solution
+	@param[in] v - Vecteur de pointeur sur Solution
+	@param[in] g - Constance gravitationnelle
+*/
 void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
 {
     for(unsigned int i=0; i<_pbm.get_dimension(); i++)
@@ -95,6 +96,11 @@ void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
     }
 }
 
+/**
+  Met à jour la vélocité et la position en fonction des valeurs précédentes et de l'acc
+	@param[in] v - Vecteur de pointeur sur Solution
+	@param[in] g - Constance gravitationnelle
+*/
 void Solution::update_solution()
 {
     for(unsigned int i = 0; i < _pbm.get_dimension(); i++)
@@ -186,6 +192,16 @@ void Solution::fitness()
     }
 }
 
+void Solution::add_position(double sol)
+{
+    _position.push_back(sol);
+}
+
+void Solution::delete_position()
+{
+    _position.pop_back();
+}
+
 /* GETTER */
 
 const Problem& Solution::get_pbm() const
@@ -201,11 +217,6 @@ double Solution::get_current_fitness() const
 double Solution::get_mass() const
 {
     return _mass;
-}
-
-double Solution::get_inertia_mass() const
-{
-    return _inertia_mass;
 }
 
 unsigned int Solution::get_size() const
@@ -250,74 +261,16 @@ void Solution::set_position(const int index, const double val)
 
 std::ostream& operator<<(std::ostream& os, const Solution& sol)
 {
-    os << "Velocite         : ";
-    for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_velocity(i) << " ";
-    os << endl;
-
-    os << "Acceleration     : " ;
-    for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_acceleration(i) << " ";
-    os << endl;
-
-    os << "Masse            : " << sol.get_mass() << endl;
-    os << "Masse inertielle : " << sol.get_inertia_mass() << endl;
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
-
-    os << "Positions        : ";
-    for(unsigned int i=0; i<sol.get_size(); i++)
-        os << sol.get_position(i) << " ";
-    os << endl;
 
     return os;
  }
-
-std::istream&  operator>>(std::istream& is, Solution& sol)
-{
-    /*
-    cout << "Entrez les valeurs sous la forme (velocite;acceleration;masse;fitness)" << endl;
-
-    char c;
-    double tmp;
-    is >> c;
-
-    is >> tmp;
-        sol.set_velocity(tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_acceleration(tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_mass(tmp);
-    is >> c;
-
-    is >> tmp;
-        sol.set_current_fitness(tmp);
-    is >> c;
-    */
-
-    return is;
-}
-
-void Solution::add_position(double sol)
-{
-    _position.push_back(sol);
-}
-
-void Solution::delete_position()
-{
-    _position.pop_back();
-}
 
 Solution& Solution::operator=(const Solution &sol)
 {
     _position = sol._position;
     _current_fitness = sol._current_fitness;
     _mass = sol._mass;
-    _inertia_mass = sol._inertia_mass;
-    _total_force = sol._total_force;
     _velocity = sol._velocity;
     _acceleration = sol._acceleration;
 

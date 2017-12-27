@@ -11,55 +11,46 @@
 
 class Solution
 {
-	//contient la declaration d'une solution
 public:
 	Solution(const Problem& pbm);
-	Solution(const Solution& sol);
 	~Solution();
 
-	friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
-	friend std::istream& operator>> (std::istream& is, Solution& sol);
-
-	//Solution& operator=  (const Solution& sol);
-	//bool operator== (const Solution& sol) const;
-	//bool operator!= (const Solution& sol) const;
-
-	void update_solution();
-	void acceleration_calculation(std::vector<Solution*> &v, double g);
-	void inertia_mass_calculation(double mass_sum); //somme de toutes les masses de la population
-	void mass_calculation(const Solution *minFit, const Solution *maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
-	void fitness();
 	void initialize(); //randomize agents positions
+	void mass_calculation(const Solution *minFit, const Solution *maxFit); //solutions ayant la fitness min et max dans la population de MyAlgorithm
+	void acceleration_calculation(std::vector<Solution*> &v, double g);
+	void update_solution();
+    bool check_boundaries();
+	void fitness();
 	void add_position(double sol);
 	void delete_position();
-  bool check_boundaries();
 
+    /* GETTER */
+	const Problem& get_pbm() const;
 	double get_current_fitness() const;
 	double get_mass() const;
-	double get_inertia_mass() const;
-	const Problem& get_pbm() const;
 	unsigned int get_size() const;
 	double get_position(const int index) const;
 	double get_velocity(const int index) const;
 	double get_acceleration(const int index) const;
 
+    /* SETTER */
 	void set_current_fitness(double fit);
 	void set_mass(double acceleration);
 	void set_position(const int index, const double val);
 
+	/* OPERATEURS DE FLUX */
 	Solution& operator=(const Solution &sol);
+	friend std::ostream& operator<< (std::ostream& os, const Solution& sol);
 
 private:
     const Problem& _pbm;
-    std::vector<double> _position;
-    double _current_fitness;
-    double _mass; // best=1 ; worst=0
-    double _inertia_mass;
-    vector<double> _total_force;
 
+    std::vector<double> _position;
     vector<double> _velocity;
     vector<double> _acceleration;
 
+    double _current_fitness;
+    double _mass; // best=1 ; worst=0
 };
 
 #endif

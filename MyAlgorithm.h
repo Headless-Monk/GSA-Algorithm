@@ -15,51 +15,29 @@ public:
 	MyAlgorithm(Problem& pbm, SetUpParams& setup);
 	~MyAlgorithm();
 
-	/*
-	* FAIT
-	*/
+	void evolution(); //makes an evolution step ; recursive function from max_it to 0
 	void initialize(); //random position for each solution + velocity=0
+    void afficher_best();
+	void afficher_all();
+    void change_parameters(SetUpParams &setup, Problem &pbm);
+
 	void upper_cost(); //trouve la meilleure solution de l'itération
 	void lower_cost(); //trouve la pire solution de l'itération
 	void best_cost_overall(); //best fitness
-	double g_evolution(int iter); //calcule g pour une itération
 	void spaceBound(Solution *sol); // check if solutions of iteration are still in boundaries ? else random pos or return to boundaries
-	void evolution(); //makes an evolution step ; recursive function from max_it to 0
-	void afficher_best();
-	void afficher_all();
-
-	/*
-	* A FAIRE
-	*/
+	double g_evolution(int iter); //calcule g pour une itération
 
 
-	//friend std::ostream& operator<< (std::ostream& os, const MyAlgorithm& myAlgo);
-	//friend std::istream& operator>> (std::istream& is, MyAlgorithm& myAlgo);
-	//MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
-	const SetUpParams& setup() const;
-	void initProblem(); //switch init upper/lower limit and dimension
 
-	// creates an array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
-	void evaluate();
-
-	//const std::vector<Solution*>& solutions() const;
-	Solution& solution(const unsigned int index) const;
-	//std::vector<struct particle>& fitness_values();
-	//double fitness(const unsigned int index) const;
-
-	double average_cost() const; //average fitness
-	Solution& best_solution() const;
-	//Solution& average_solution() const;
-	//Solution& worst_solution() const;
-
-    void change_parameters(SetUpParams &setup, Problem &pbm);
 private:
 	std::vector<Solution*> _solutions;     // individuals in population
+    Solution *_upper_cost, *_lower_cost; // lower and upper fitness of individuals in population
+	Solution *_best_Solution_overall;
+
 	Problem &_pbm;
 	SetUpParams &_setup;
-	Solution *_upper_cost, *_lower_cost; // lower and upper fitness of individuals in population
+
 	double _g;
-	Solution *_best_Solution_overall;
 };
 
 #endif

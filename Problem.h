@@ -6,15 +6,13 @@
 
 using namespace std;
 
-class Problem // boundaries and dimension of search space
+class Problem
 {
 public:
 	Problem(int num);
 	~Problem();
 
-	friend ostream& operator<< (ostream& os, const Problem& pbm);
-	friend istream& operator>> (istream& is, Problem& pbm);
-
+	/* SETTER */
 	void set_num_pbm(int num);
 	void set_direction(int direction);
 	void set_LowerLimit(double lowerLimit);
@@ -22,6 +20,7 @@ public:
 	void set_dimension(int dimension);
 	void set_nom(std::string nom);
 
+    /* GETTER */
 	int get_num_pbm() const;
 	int get_direction() const;
 	double get_LowerLimit() const;
@@ -29,6 +28,11 @@ public:
 	unsigned int get_dimension() const;
 	std::string get_nom_pbm() const;
 
+    /* SURCHARGES OPERATEURS DE FLUX */
+	friend ostream& operator<< (ostream& os, const Problem& pbm);
+	friend istream& operator>> (istream& is, Problem& pbm);
+
+    /* SURCHARGES OPERATEURS LOGIQUES */
 	Problem& operator=  (const Problem& pbm);
 	bool operator== (const Problem& pbm) const;
 	bool operator!= (const Problem& pbm) const;

@@ -1,8 +1,8 @@
 #include "Problem.h"
 
-Problem::Problem(int num): _num_pbm{num}
+Problem::Problem(int num): _num_pbm(num)
 {
-  _dimension = 10;
+  _dimension = 30;
   switch(_num_pbm)
   {
     case 1 :
@@ -45,15 +45,14 @@ Problem::Problem(int num): _num_pbm{num}
       _nom_pbm = "Weierstrass";
       _LowerLimit = -2;
       _UpperLimit = 2;
-      _dimension = 1; //à vérifier
-      _direction = 0; //à vérifier
+      _dimension = 1;
+      _direction = 1;
       break;
   }
 }
 
 Problem::~Problem()
-{
-}
+{}
 
 /*
 SETTER
