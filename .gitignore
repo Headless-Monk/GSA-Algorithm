@@ -36,3 +36,5 @@
 *.cbp
 *.depend
 *.layout
+*.win
+*.dev
