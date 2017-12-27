@@ -1,0 +1,7 @@
+<map id="MyAlgorithm::spaceBound" name="MyAlgorithm::spaceBound">
+<area shape="rect" id="node2" href="$class_solution.html#a24822b654faafe496bfb1bf08f22f5fc" title="Solution::check_boundaries" alt="" coords="228,31,411,57"/>
+<area shape="rect" id="node6" href="$class_solution.html#a0524895b67d4e1163597dbff219d4215" title="Solution::initialize" alt="" coords="257,81,381,108"/>
+<area shape="rect" id="node3" href="$class_problem.html#a8cf7cbe02db152e2d78f11fa3c34da68" title="Problem::get_dimension" alt="" coords="460,5,623,32"/>
+<area shape="rect" id="node4" href="$class_problem.html#acd345039ba932368c77d844089abaa9e" title="Problem::get_UpperLimit" alt="" coords="459,56,624,83"/>
+<area shape="rect" id="node5" href="$class_problem.html#aab1ef27a357b113c118d5e0fc949597c" title="Problem::get_LowerLimit" alt="" coords="459,107,624,133"/>
+</map>

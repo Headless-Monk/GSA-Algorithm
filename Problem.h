@@ -34,8 +34,6 @@ public:
 
     /* SURCHARGES OPERATEURS LOGIQUES */
 	Problem& operator=  (const Problem& pbm);
-	bool operator== (const Problem& pbm) const;
-	bool operator!= (const Problem& pbm) const;
 
 private:
 	int _num_pbm;

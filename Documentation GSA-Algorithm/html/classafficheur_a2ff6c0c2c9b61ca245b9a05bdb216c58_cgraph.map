@@ -1,0 +1,8 @@
+<map id="afficheur::afficher_menu_eddit" name="afficheur::afficher_menu_eddit">
+<area shape="rect" id="node2" href="$class_set_up_params.html#af4c277b65cd35c6bafee02bb37460064" title="SetUpParams::set_nb\l_evolution_steps" alt="" coords="210,5,361,47"/>
+<area shape="rect" id="node3" href="$class_set_up_params.html#aef5303892950fcd5b4fc6b79825ca3f5" title="SetUpParams::update\l_nb_independant_runs" alt="" coords="209,71,361,112"/>
+<area shape="rect" id="node4" href="$class_set_up_params.html#a64c059ca955bad1c7b962e983effb921" title="SetUpParams::set_population_size" alt="" coords="172,137,399,163"/>
+<area shape="rect" id="node5" href="$class_problem.html#a353f7389ade69c5eaacf5a18125fe425" title="Problem::set_dimension" alt="" coords="204,187,367,214"/>
+<area shape="rect" id="node6" href="$class_my_algorithm.html#afa8fd78e8768be90069a0a862e66e0aa" title="MyAlgorithm::change\l_parameters" alt="" coords="213,239,358,280"/>
+<area shape="rect" id="node7" href="$class_set_up_params.html#a3a9fac0edfc21af1eff9fd02ee9bb386" title="SetUpParams::get_population_size" alt="" coords="447,246,673,273"/>
+</map>

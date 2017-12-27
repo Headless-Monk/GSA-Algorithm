@@ -1,0 +1,14 @@
+<map id="SetUpParams::get_population_size" name="SetUpParams::get_population_size">
+<area shape="rect" id="node2" href="$class_my_algorithm.html#af17de0021cd0e3452c03e31bc5692f6f" title="MyAlgorithm::MyAlgorithm" alt="" coords="284,5,460,32"/>
+<area shape="rect" id="node3" href="$class_my_algorithm.html#a7ba90ce309c17db02d6d277315d6db77" title="MyAlgorithm::~MyAlgorithm" alt="" coords="280,56,464,83"/>
+<area shape="rect" id="node4" href="$class_my_algorithm.html#ae560fba6ec895c1dc82f8a2bb26570a3" title="MyAlgorithm::evolution" alt="" coords="512,259,665,285"/>
+<area shape="rect" id="node8" href="$class_my_algorithm.html#aae992920a3b35744b3412cb7cc6b4b18" title="MyAlgorithm::initialize" alt="" coords="513,157,664,184"/>
+<area shape="rect" id="node9" href="$class_my_algorithm.html#a847aab5cc6656b5d06ba9dfd14cbfc13" title="MyAlgorithm::afficher_all" alt="" coords="290,208,454,235"/>
+<area shape="rect" id="node10" href="$class_my_algorithm.html#afa8fd78e8768be90069a0a862e66e0aa" title="MyAlgorithm::change\l_parameters" alt="" coords="516,342,661,383"/>
+<area shape="rect" id="node12" href="$class_my_algorithm.html#a180e40bd55b6ae1a7afcace542413ba9" title="MyAlgorithm::upper_cost" alt="" coords="289,259,455,285"/>
+<area shape="rect" id="node13" href="$class_my_algorithm.html#a727a59afc346c782a203c6df25bb0bcf" title="MyAlgorithm::lower_cost" alt="" coords="289,309,455,336"/>
+<area shape="rect" id="node5" href="$classafficheur.html#ad17ff6185ba8d58af8218dde8a90028c" title="afficheur::start_resolution" alt="" coords="713,259,880,285"/>
+<area shape="rect" id="node6" href="$classafficheur.html#adb5221898ba2b8b3ed2d2d0b919826d5" title="afficheur::init" alt="" coords="928,299,1023,325"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="1071,299,1121,325"/>
+<area shape="rect" id="node11" href="$classafficheur.html#a2ff6c0c2c9b61ca245b9a05bdb216c58" title="afficheur::afficher\l_menu_eddit" alt="" coords="737,331,856,373"/>
+</map>

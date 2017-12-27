@@ -2,6 +2,11 @@
 #include <fstream>
 #include <iostream>
 
+/**
+  Constructeur de MyAlgorithm
+  @param[in] pbm - Problem
+  @param[in] setup - SetUpParams
+*/
 MyAlgorithm::MyAlgorithm(Problem& pbm, SetUpParams& setup):
     _solutions(), _upper_cost(NULL), _lower_cost(NULL),
     _best_Solution_overall(NULL), _pbm(pbm), _setup(setup), _g(0)
@@ -12,6 +17,9 @@ MyAlgorithm::MyAlgorithm(Problem& pbm, SetUpParams& setup):
     _best_Solution_overall = new Solution{_pbm};
 }
 
+/**
+  Destructeur de MyAlgorithm
+*/
 MyAlgorithm::~MyAlgorithm()
 {
     for(unsigned int i = 0; i < _setup.get_population_size(); i++)
@@ -20,6 +28,9 @@ MyAlgorithm::~MyAlgorithm()
     delete _best_Solution_overall;
 }
 
+/**
+  Realise une evolution complète sur l'ensemble des solutions (calcul de l'acceleration, calcul de fitness, mise a jour des positions des solutions, ...)
+*/
 void MyAlgorithm::evolution()
 {
     double c = 0.0;
@@ -68,6 +79,9 @@ void MyAlgorithm::evolution()
     }
 }
 
+/**
+  Initialisation de toutes les solutions
+*/
 void MyAlgorithm::initialize()
 {
     for(unsigned int i = 0; i < _setup.get_population_size(); i++)
@@ -77,17 +91,28 @@ void MyAlgorithm::initialize()
     _best_Solution_overall->fitness();
 }
 
+/**
+  Affiche sur la console la meilleure solution de la population
+*/
 void MyAlgorithm::afficher_best()
 {
     cout << *_best_Solution_overall << endl;
 }
 
+/**
+  Affiche sur la console toutes les solutions de la population
+*/
 void MyAlgorithm::afficher_all()
 {
     for(unsigned int i=0; i<_setup.get_population_size(); i++)
         cout << *_solutions[i] << endl;
 }
 
+/**
+  Cree une nouvelle resolution avec les nouveaux paramètres modifies
+  @param[in] setup - SetUpParams
+  @param[in] pbm - Problem
+*/
 void MyAlgorithm::change_parameters(SetUpParams &setup, Problem &pbm)
 {
     _setup = setup;
@@ -106,6 +131,9 @@ void MyAlgorithm::change_parameters(SetUpParams &setup, Problem &pbm)
     _best_Solution_overall = new Solution(_pbm);
 }
 
+/**
+  Met à jour la plus haute fitness de la population en fonction des fitness de l'evolution actuelle
+*/
 void MyAlgorithm::upper_cost()
 {
     _upper_cost = _solutions[0];
@@ -114,6 +142,9 @@ void MyAlgorithm::upper_cost()
             _upper_cost = _solutions[i];
 }
 
+/**
+  Met à jour la plus basse fitness de la population en fonction des fitness de l'evolution actuelle
+*/
 void MyAlgorithm::lower_cost()
 {
     _lower_cost = _solutions[0];
@@ -122,6 +153,9 @@ void MyAlgorithm::lower_cost()
             _lower_cost = _solutions[i];
 }
 
+/**
+  Met à jour la plus haute fitness de la population en fonction des fitness de l'evolution actuelle
+*/
 void MyAlgorithm::best_cost_overall()
 {
 
@@ -137,12 +171,21 @@ void MyAlgorithm::best_cost_overall()
     }
 }
 
+/**
+  Verifie si une solution est dans les limites du problème courant, si non, la solution est replacee avec une postion tiree au hasard à l'interieur des limites
+  @param[in] sol - Solution
+*/
 void MyAlgorithm::spaceBound(Solution *sol)
 {
     if(sol->check_boundaries() == false)
         sol->initialize();
 }
 
+/**
+  Fais evoluer la constante gravitationnelle g en fonction d'une constante g0 et d'une constante alpha
+  @param[in] iter - int
+  @param[in] g - double
+*/
 double MyAlgorithm::g_evolution(int iter)
 {
     double g0 = 100;

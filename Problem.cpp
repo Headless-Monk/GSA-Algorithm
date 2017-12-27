@@ -1,5 +1,9 @@
 #include "Problem.h"
 
+/**
+  Constructeur de problème
+	@param[in] num - Numero du problème
+*/
 Problem::Problem(int num): _num_pbm(num)
 {
   _dimension = 30;
@@ -51,6 +55,9 @@ Problem::Problem(int num): _num_pbm(num)
   }
 }
 
+/**
+  Destructeur de problème
+*/
 Problem::~Problem()
 {}
 
@@ -58,31 +65,55 @@ Problem::~Problem()
 SETTER
 */
 
+/**
+  Modifie le numero du probleme
+	@param[in] num - Numero du problème
+*/
 void Problem::set_num_pbm(int num)
 {
     _num_pbm = num;
 }
 
+/**
+  Modifie la direction du problème Maximisation/Minimisation
+	@param[in] direction - Direction du problème
+*/
 void Problem::set_direction(int direction)
 {
     _direction = direction;
 }
 
+/**
+  Modifie la limite basse du problème
+	@param[in] lowerLimit - limite basse
+*/
 void Problem::set_LowerLimit(double lowerLimit)
 {
     _LowerLimit = lowerLimit;
 }
 
+/**
+  Modifie la limite haute du problème
+	@param[in] upperLimit - limite haute
+*/
 void Problem::set_UpperLimit(double upperLimit)
 {
     _UpperLimit = upperLimit;
 }
 
+/**
+  Modifie la dimension du problème
+	@param[in] dimension - dimension
+*/
 void Problem::set_dimension(int dimension)
 {
     _dimension = dimension;
 }
 
+/**
+  Modifie le nom du problème
+	@param[in] nom - nom du probleme
+*/
 void Problem::set_nom(std::string nom)
 {
     _nom_pbm = nom;
@@ -93,31 +124,55 @@ void Problem::set_nom(std::string nom)
 GETTER
 */
 
+/**
+  Retourne le numero du probleme
+	@param[out] num - int
+*/
 int Problem::get_num_pbm() const
 {
     return _num_pbm;
 }
 
+/**
+  Retourne la direction du problème
+	@param[out] dir - int
+*/
 int Problem::get_direction() const
 {
     return _direction;
 }
 
+/**
+  Retourne la limite basse du problème
+	@param[out] lowerlimit - double
+*/
 double Problem::get_LowerLimit() const
 {
     return _LowerLimit;
 }
 
+/**
+  Retourne la limite haute du problème
+	@param[out] upperlimit - double
+*/
 double Problem::get_UpperLimit() const
 {
     return _UpperLimit;
 }
 
+/**
+  Retourne la dimension du problème
+	@param[out] dimension - int
+*/
 unsigned int Problem::get_dimension() const
 {
     return _dimension;
 }
 
+/**
+  Retourne le nom du problème
+	@param[out] nom_pbm - string
+*/
 std::string Problem::get_nom_pbm() const
 {
     return _nom_pbm;
@@ -127,6 +182,12 @@ std::string Problem::get_nom_pbm() const
 SURCHARGES OPERATEURS DE FLUX
 */
 
+/**
+  Affiche toutes les donnees du problème sur le flux passe en parametre
+	@param[in] os - ostream
+	@param[in] pbm - Problem
+	@param[out] os - ostream
+*/
 ostream& operator<<(ostream& os, const Problem& pbm)
 {
     os << "Nom du probleme :    " << pbm.get_nom_pbm() << endl;
@@ -141,6 +202,12 @@ ostream& operator<<(ostream& os, const Problem& pbm)
     return os;
 }
 
+/**
+  Lit les donnees du probleme sur le flux passe en parametre
+	@param[in] is - istream
+	@param[in] pbm - Problem
+	@param[out] is - istream
+*/
 istream& operator>>(istream& is, Problem& pbm)
 {
     cout << "Entrez les valeurs sous la forme (Numero probleme;Direction;Limite basse;Limite haute;Dimension)" << endl;
@@ -177,6 +244,11 @@ istream& operator>>(istream& is, Problem& pbm)
 SURCHARGES OPERATEURS LOGIQUES
 */
 
+/**
+  Recopie le probleme passee en parametre dans le probleme actuel
+  	@param[in] pbm - Problem
+	@param[out] pbm - Problem
+*/
 Problem& Problem::operator=(const Problem& pbm)
 {
     set_nom(pbm.get_nom_pbm());
@@ -187,14 +259,4 @@ Problem& Problem::operator=(const Problem& pbm)
     set_dimension(pbm.get_dimension());
 
     return *this;
-}
-
-bool Problem::operator==(const Problem& pbm) const
-{
-    return (get_num_pbm() == pbm.get_num_pbm() && get_direction() == pbm.get_direction() && get_LowerLimit() == pbm.get_LowerLimit() && get_UpperLimit() == pbm.get_UpperLimit() && get_dimension() == pbm.get_dimension());
-}
-
-bool Problem::operator!= (const Problem& pbm) const
-{
-    return !(*this==pbm);
 }

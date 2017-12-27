@@ -21,7 +21,7 @@ public:
 	void update_solution();
     bool check_boundaries();
 	void fitness();
-	void add_position(double sol);
+	void add_position(double pos);
 	void delete_position();
 
     /* GETTER */
@@ -36,7 +36,7 @@ public:
     /* SETTER */
 	void set_current_fitness(double fit);
 	void set_mass(double acceleration);
-	void set_position(const int index, const double val);
+	void set_position(const int index, const double pos);
 
 	/* OPERATEURS DE FLUX */
 	Solution& operator=(const Solution &sol);

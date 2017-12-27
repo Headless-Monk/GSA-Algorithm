@@ -1,0 +1,25 @@
+var class_solution =
+[
+    [ "Solution", "class_solution.html#aafc8c4229306151e9a5402c04008cfb1", null ],
+    [ "~Solution", "class_solution.html#a5d245f7409aacf6ace5e965b7879a580", null ],
+    [ "acceleration_calculation", "class_solution.html#a81010fb05be3317f2440a70272bfa583", null ],
+    [ "add_position", "class_solution.html#a6e084206a0fb1e32885e35c82971f439", null ],
+    [ "check_boundaries", "class_solution.html#a24822b654faafe496bfb1bf08f22f5fc", null ],
+    [ "delete_position", "class_solution.html#a5c91de00d933e0a9cc58e1101857b8a9", null ],
+    [ "fitness", "class_solution.html#a2ac180b4197973ece0350a98aeafd478", null ],
+    [ "get_acceleration", "class_solution.html#a9b010dddf660cb8b0e09d6ac53d497f6", null ],
+    [ "get_current_fitness", "class_solution.html#ac432fffaa312cef4498a0b3140c3a72d", null ],
+    [ "get_mass", "class_solution.html#aa6824d341bfca36165cae6b230fce5a6", null ],
+    [ "get_pbm", "class_solution.html#a806148f168550ece1724aff621c5b2bf", null ],
+    [ "get_position", "class_solution.html#ab06160809e68a292816a94707d47d77f", null ],
+    [ "get_size", "class_solution.html#affde1879bbd9b3173627998adeb0387c", null ],
+    [ "get_velocity", "class_solution.html#aaac6c13c20bec5ad62a801b281201f34", null ],
+    [ "initialize", "class_solution.html#a0524895b67d4e1163597dbff219d4215", null ],
+    [ "mass_calculation", "class_solution.html#af588c6d5a52c61780d09080ec88be993", null ],
+    [ "operator=", "class_solution.html#ab00d05fe10855c14a0e0f5539fba5fcc", null ],
+    [ "set_current_fitness", "class_solution.html#a89507f5556ea99895e69b6c8f4db3fd2", null ],
+    [ "set_mass", "class_solution.html#a29171c28726b0d6186f82c43b6631b0b", null ],
+    [ "set_position", "class_solution.html#ac7c02d71c76fd01682a09903920e39a0", null ],
+    [ "update_solution", "class_solution.html#a0f27a0d671c9a7af2dba5bedeb5f55bc", null ],
+    [ "operator<<", "class_solution.html#a729a239df4aa6fdeba0643aeb7c9a7e8", null ]
+];

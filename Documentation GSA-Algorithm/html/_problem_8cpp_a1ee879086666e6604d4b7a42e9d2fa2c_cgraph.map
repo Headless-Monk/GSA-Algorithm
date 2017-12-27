@@ -1,0 +1,7 @@
+<map id="operator&gt;&gt;" name="operator&gt;&gt;">
+<area shape="rect" id="node2" href="$class_problem.html#a6b83bad5e0483d870bfc836d5c32dea6" title="Problem::set_num_pbm" alt="" coords="141,5,301,32"/>
+<area shape="rect" id="node3" href="$class_problem.html#ac8fcab8c4ad6269e8bcbdfce0c4b9bba" title="Problem::set_direction" alt="" coords="145,56,297,83"/>
+<area shape="rect" id="node4" href="$class_problem.html#a11bc127289f51bb88a6898f33bc694b8" title="Problem::set_LowerLimit" alt="" coords="139,107,304,133"/>
+<area shape="rect" id="node5" href="$class_problem.html#a9b47a9e44d660d83abc530c9f048c9f7" title="Problem::set_UpperLimit" alt="" coords="139,157,304,184"/>
+<area shape="rect" id="node6" href="$class_problem.html#a353f7389ade69c5eaacf5a18125fe425" title="Problem::set_dimension" alt="" coords="140,208,303,235"/>
+</map>

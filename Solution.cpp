@@ -4,6 +4,10 @@
     #define M_PI 3.1415926535897932384626
 #endif
 
+/**
+  Constructeur de solution
+	@param[in] pbm - probleme
+*/
 Solution::Solution(const Problem& pbm):
         _pbm(pbm),
         _position(), _velocity(), _acceleration(),
@@ -23,8 +27,7 @@ Solution::~Solution()
 {}
 
 /**
-  Initialise la position de toutes les solutions avec un nombre aléatoire compris entre les bornes du problème
-	@param[out] position - Vecteurs position
+  Initialise la position de toutes les solutions avec un nombre aleatoire compris entre les bornes du probleme
 */
 void Solution::initialize()
 {
@@ -33,10 +36,9 @@ void Solution::initialize()
 }
 
 /**
-  Calcule la masse gravitationnelle d'une planète en fonction de la fitness maximale et minimale
-	@param[in] *minFit - Un pointeur sur la fitness minimale de la solution
-	@param[in] *maxFit - Un pointeur sur la fitness maximale de la solution
-	@param[out] mass - La masse gravitationnelle de la solution
+  Calcule la masse gravitationnelle d'une planete en fonction de la fitness maximale et minimale
+	@param[in] *minFit - Solution*
+	@param[in] *maxFit - Solution*
 */
 void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 {
@@ -61,9 +63,9 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
 }
 
 /**
-  Calcule l'accéleration d'une solution
-	@param[in] v - Vecteur de pointeur sur Solution
-	@param[in] g - Constance gravitationnelle
+  Calcule l'acceleration d'une solution en fonction des autres solutions du probleme et d'une constante gravitationnelle g
+	@param[in] v - vector<Solution*>
+	@param[in] g - double
 */
 void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
 {
@@ -97,9 +99,7 @@ void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
 }
 
 /**
-  Met à jour la vélocité et la position en fonction des valeurs précédentes et de l'acc
-	@param[in] v - Vecteur de pointeur sur Solution
-	@param[in] g - Constance gravitationnelle
+  Met a jour la velocite et la position en fonction des valeurs precedentes et de l'acceleration
 */
 void Solution::update_solution()
 {
@@ -110,6 +110,10 @@ void Solution::update_solution()
     }
 }
 
+/**
+  Verifie que les positions de la solution se trouvent dans les limites de la fonction objective
+	@param[out] Vrai/Faux - bool
+*/
 bool Solution::check_boundaries()
 {
   for(unsigned int i=0; i<_pbm.get_dimension(); i++)
@@ -118,6 +122,9 @@ bool Solution::check_boundaries()
   return true;
 }
 
+/**
+  Calcule et modifie la fitness courante de la solution
+*/
 void Solution::fitness()
 {
     double sum = 0;
@@ -192,11 +199,18 @@ void Solution::fitness()
     }
 }
 
-void Solution::add_position(double sol)
+/**
+  Ajoute une dimension au vecteur position de valeur pos à la suite des autres
+	@param[in] sol - double
+*/
+void Solution::add_position(double pos)
 {
-    _position.push_back(sol);
+    _position.push_back(pos);
 }
 
+/**
+  Supprime la derniere dimension du vecteur position
+*/
 void Solution::delete_position()
 {
     _position.pop_back();
@@ -204,36 +218,67 @@ void Solution::delete_position()
 
 /* GETTER */
 
+/**
+  Retourne le probleme contenu dans une solution
+  @param[out] pbm - Problem
+*/
 const Problem& Solution::get_pbm() const
 {
     return _pbm;
 }
 
+/**
+  Retourne la fitness actuelle d'une solution
+  @param[out] fitness - double
+*/
 double Solution::get_current_fitness() const
 {
     return _current_fitness;
 }
 
+/**
+  Retourne la masse d'une solution
+  @param[out] masse - double
+*/
 double Solution::get_mass() const
 {
     return _mass;
 }
 
+/**
+  Retourne la taille du vecteur position d'une solution
+  @param[out] taille - int
+*/
 unsigned int Solution::get_size() const
 {
     return _position.size();
 }
 
+/**
+  Retourne la valeur de la position d'une solution pour un index donnee
+  @param[in] index - int
+  @param[out] position - double
+*/
 double Solution::get_position(const int index) const
 {
     return _position[index];
 }
 
+/**
+  Retourne la valeur de la vitesse d'une solution pour un index donnee
+  @param[in] index - int
+  @param[out] vitesse - double
+*/
 double Solution::get_velocity(const int index) const
 {
     return _velocity[index];
 }
 
+/**
+  Retourne la valeur de l'acceleration d'une solution pour un index donnee
+  @param[in] index - int
+  @param[out] acceleration - double
+*/
 double Solution::get_acceleration(const int index) const
 {
     return _acceleration[index];
@@ -241,24 +286,43 @@ double Solution::get_acceleration(const int index) const
 
 /* SETTER */
 
+/**
+  Modifie la valeur de la fitness actuelle d'une solution
+  @param[in] fit - double
+*/
 void Solution::set_current_fitness(double fit)
 {
     _current_fitness = fit;
 }
 
+/**
+  Modifie la valeur de la masse d'une solution
+  @param[in] mass - double
+*/
 void Solution::set_mass(double mass)
 {
     _mass = mass;
 }
 
-void Solution::set_position(const int index, const double val)
+/**
+  Modifie la valeur de la position d'une solution à une dimension donnee
+  @param[in] pos - double
+  @param[in] index - int
+*/
+void Solution::set_position(const int index, const double pos)
 {
-    _position[index] = val;
+    _position[index] = pos;
 }
 
 
 /* OPERATEURS DE FLUX */
 
+/**
+  Affiche sur le flux passe en parametre toutes les informations de la solution
+  @param[in] os - ostream
+  @param[in] sol - Solution
+  @param[out] os - ostream
+*/
 std::ostream& operator<<(std::ostream& os, const Solution& sol)
 {
     os << "Fitness actuelle : " << sol.get_current_fitness() << endl;
@@ -266,6 +330,11 @@ std::ostream& operator<<(std::ostream& os, const Solution& sol)
     return os;
  }
 
+/**
+  Recopie la solution passee en parametre dans la solution actuelle
+  @param[in] sol - Solution
+  @param[out] sol - Solution
+*/
 Solution& Solution::operator=(const Solution &sol)
 {
     _position = sol._position;

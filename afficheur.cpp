@@ -4,14 +4,23 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+/**
+  Constructeur d'afficheur
+*/
 afficheur::afficheur() : _pbm(1), _setup(), _algo(_pbm, _setup)
 {
     srand(time(NULL));
 }
 
+/**
+  Destructeur d'afficheur
+*/
 afficheur::~afficheur()
 {}
 
+/**
+  Initialisation du selecteur et affichage de probleme et du menu
+*/
 void afficheur::init()
 {
     int choix = 0;
@@ -38,6 +47,9 @@ void afficheur::init()
     }
 }
 
+/**
+  Affiche le probleme dans la console
+*/
 void afficheur::afficher_pbm()
 {
     cout << "Probleme courant :" << endl << endl;
@@ -45,6 +57,9 @@ void afficheur::afficher_pbm()
     cout << _setup << endl;
 }
 
+/**
+  Affiche le menu principale dans la console
+*/
 void afficheur::afficher_menu_principal()
 {
     cout << "(1) Lancer la resolution" << endl;
@@ -52,6 +67,9 @@ void afficheur::afficher_menu_principal()
     cout << "(3) Quitter" << endl;
 }
 
+/**
+  Lance la resolution et affiche la premiere solution au debut, et la meilleure solution à la fin de la resolution 
+*/
 void afficheur::start_resolution()
 {
     cout << endl;
@@ -81,6 +99,9 @@ void afficheur::start_resolution()
     }
 }
 
+/**
+  Affiche le menu d'edition des parametres de la resolution
+*/
 void afficheur::afficher_menu_eddit()
 {
     int choix = 0;
