@@ -3,8 +3,8 @@
 #include <iostream>
 
 MyAlgorithm::MyAlgorithm(Problem& pbm, SetUpParams& setup):
-    _solutions{}, _upper_cost{nullptr}, _lower_cost{nullptr},
-    _best_Solution_overall{nullptr}, _pbm{pbm}, _setup{setup}, _g{0}
+    _solutions(), _upper_cost(NULL), _lower_cost(NULL),
+    _best_Solution_overall(NULL), _pbm(pbm), _setup(setup), _g(0)
 {
     for(unsigned int i = 0; i < _setup.get_population_size(); i++)
         _solutions.push_back(new Solution{_pbm});
@@ -97,13 +97,13 @@ void MyAlgorithm::change_parameters(SetUpParams &setup, Problem &pbm)
         delete _solutions[i];
     _solutions.resize(0);
     for(unsigned int i = 0; i < _setup.get_population_size(); i++)
-        _solutions.push_back(new Solution{_pbm});
+        _solutions.push_back(new Solution(_pbm));
 
-    _upper_cost = nullptr;
-    _lower_cost = nullptr;
+    _upper_cost = NULL;
+    _lower_cost = NULL;
     _g = 0;
     delete _best_Solution_overall;
-    _best_Solution_overall = new Solution{_pbm};
+    _best_Solution_overall = new Solution(_pbm);
 }
 
 void MyAlgorithm::upper_cost()

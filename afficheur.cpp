@@ -4,7 +4,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-afficheur::afficheur() : _pbm{1}, _setup{}, _algo{_pbm, _setup}
+afficheur::afficheur() : _pbm(1), _setup(), _algo(_pbm, _setup)
 {
     srand(time(NULL));
 }
@@ -124,7 +124,7 @@ void afficheur::afficher_menu_eddit()
                 cout << " --> Weierstrass (6) "<<endl;
 
                 cin >> choix;
-                _pbm = Problem{choix};
+                _pbm = Problem(choix);
                 break;
             case 5:
                 _algo.change_parameters(_setup, _pbm);

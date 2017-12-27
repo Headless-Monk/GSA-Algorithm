@@ -2,8 +2,8 @@
 
 
 SetUpParams::SetUpParams():
-    _nb_evolution_steps{2000000}, _population_size{30},
-    _nb_independant_runs{_nb_evolution_steps/_population_size}
+    _nb_evolution_steps(2000000), _population_size(30),
+    _nb_independant_runs(_nb_evolution_steps/_population_size)
 {}
 
 SetUpParams::~SetUpParams()

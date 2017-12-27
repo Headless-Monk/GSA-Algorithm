@@ -5,9 +5,9 @@
 #endif
 
 Solution::Solution(const Problem& pbm):
-        _pbm{pbm},
-        _position{}, _velocity{}, _acceleration{},
-        _current_fitness{0}, _mass{0}
+        _pbm(pbm),
+        _position(), _velocity(), _acceleration(),
+        _current_fitness(0), _mass(0)
 {
     _position.reserve(_pbm.get_dimension());
     _position.resize(_pbm.get_dimension(), 0);

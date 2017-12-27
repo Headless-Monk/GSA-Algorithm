@@ -1,6 +1,6 @@
 #include "Problem.h"
 
-Problem::Problem(int num): _num_pbm{num}
+Problem::Problem(int num): _num_pbm(num)
 {
   _dimension = 30;
   switch(_num_pbm)
