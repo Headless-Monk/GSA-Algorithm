@@ -28,7 +28,7 @@ void MyAlgorithm::evolution()
         /* chargement */
         if( ( (double)iter / (double)_setup.get_nb_independant_runs() ) >= c)
         {
-            cout << (char)219u;
+            cout << "_";
             c += 0.01;
         }
 
