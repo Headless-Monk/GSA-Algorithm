@@ -34,7 +34,6 @@ MyAlgorithm::~MyAlgorithm()
 void MyAlgorithm::evolution()
 {
     double c = 0.0;
-    double mass_sum = 0;
     for(unsigned int iter=0; iter<_setup.get_nb_independant_runs(); iter++)
     {
         /* chargement */
