@@ -48,12 +48,12 @@ private:
     const Problem& _pbm;
 
     std::vector<double> _position;
-    double _inertia_mass;
     vector<double> _velocity;
     vector<double> _acceleration;
 
     double _current_fitness;
     double _mass; // best=1 ; worst=0
+    double _inertia_mass;
 };
 
 #endif
