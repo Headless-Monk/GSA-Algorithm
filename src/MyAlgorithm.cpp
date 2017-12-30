@@ -29,7 +29,7 @@ MyAlgorithm::~MyAlgorithm()
 }
 
 /**
-  Realise une evolution complète sur l'ensemble des solutions (calcul de l'acceleration, calcul de fitness, mise a jour des positions des solutions, ...)
+  Realise une evolution complète sur l'ensemble des solutions (calcul de l'acceleration, calcul de fitness, mise a jour des positions des solutions, ..)
 */
 void MyAlgorithm::evolution()
 {
