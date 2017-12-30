@@ -9,9 +9,11 @@
 	@param[in] pbm - probleme
 */
 Solution::Solution(const Problem& pbm):
-        _pbm(pbm),
-        _position(), _velocity(), _acceleration(),
-        _current_fitness(0), _mass(0)
+        _pbm{pbm},
+		_position{}, 
+		_current_fitness{0}, 
+		_mass{0}, 
+		_inertia_mass{0}
 {
     _position.reserve(_pbm.get_dimension());
     _position.resize(_pbm.get_dimension(), 0);
@@ -62,6 +64,11 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
+void Solution::inertia_mass_calculation(double mass_sum)
+{
+    _inertia_mass = _mass / mass_sum;
+}
+
 /**
   Calcule l'acceleration d'une solution en fonction des autres solutions du probleme et d'une constante gravitationnelle g
 	@param[in] v - vector<Solution*>
@@ -92,7 +99,7 @@ void Solution::acceleration_calculation(std::vector<Solution*> &v, double g)
             for(unsigned int k=0; k<_pbm.get_dimension(); k++)
             {
                 double r = ((double)rand() / RAND_MAX);
-                _acceleration[k] += ( (r * g * v[j]->_mass * (v[j]->_position[k] - _position[k])) / (distance + e) );
+                _acceleration[k] += ( (r * g * v[j]->_inertia_mass * (v[j]->_position[k] - _position[k])) / (distance + e) );
             }
         }
     }
@@ -245,6 +252,11 @@ double Solution::get_mass() const
     return _mass;
 }
 
+double Solution::get_inertia_mass() const
+{
+    return _inertia_mass;
+}
+
 /**
   Retourne la taille du vecteur position d'une solution
   @param[out] taille - int
@@ -340,6 +352,7 @@ Solution& Solution::operator=(const Solution &sol)
     _position = sol._position;
     _current_fitness = sol._current_fitness;
     _mass = sol._mass;
+    _inertia_mass = sol._inertia_mass;
     _velocity = sol._velocity;
     _acceleration = sol._acceleration;
 

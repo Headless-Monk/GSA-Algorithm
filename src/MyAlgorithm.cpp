@@ -34,6 +34,7 @@ MyAlgorithm::~MyAlgorithm()
 void MyAlgorithm::evolution()
 {
     double c = 0.0;
+    double mass_sum = 0;
     for(unsigned int iter=0; iter<_setup.get_nb_independant_runs(); iter++)
     {
         /* chargement */
@@ -44,7 +45,7 @@ void MyAlgorithm::evolution()
         }
 
 
-        /* évaluation des individus */
+        /* evaluation des individus */
         for(unsigned int i=0; i<_setup.get_population_size(); i++)
             spaceBound(_solutions[i]);
         for(unsigned int i=0; i<_setup.get_population_size(); i++)
@@ -53,7 +54,7 @@ void MyAlgorithm::evolution()
         }
 
 
-        /* recherche des solutuions extrémales */
+        /* recherche des solutuions extremales */
         upper_cost();
         lower_cost();
         best_cost_overall();
@@ -61,8 +62,14 @@ void MyAlgorithm::evolution()
 
         /* calcul des masses*/
         for(unsigned int i=0; i<_setup.get_population_size(); i++)
+        {
             _solutions[i]->mass_calculation(_lower_cost, _upper_cost);
-
+            mass_sum += _solutions[i]->get_mass();
+    	}
+    	
+        /*calcul des masses inertielles*/
+		for(unsigned int i=0; i<_setup.get_population_size(); i++)
+        	_solutions[i]->inertia_mass_calculation(mass_sum);
 
         /* calcul de g */
         _g = g_evolution(iter);
