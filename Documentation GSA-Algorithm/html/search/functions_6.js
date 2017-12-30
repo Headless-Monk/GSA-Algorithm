@@ -5,6 +5,7 @@ var searchData=
   ['get_5fcurrent_5ffitness',['get_current_fitness',['../class_solution.html#ac432fffaa312cef4498a0b3140c3a72d',1,'Solution']]],
   ['get_5fdimension',['get_dimension',['../class_problem.html#a8cf7cbe02db152e2d78f11fa3c34da68',1,'Problem']]],
   ['get_5fdirection',['get_direction',['../class_problem.html#a2d2be541acbe6fd79fc4ce8357a36fed',1,'Problem']]],
+  ['get_5finertia_5fmass',['get_inertia_mass',['../class_solution.html#a1258863fad18c47eb21729f66d01d302',1,'Solution']]],
   ['get_5flowerlimit',['get_LowerLimit',['../class_problem.html#aab1ef27a357b113c118d5e0fc949597c',1,'Problem']]],
   ['get_5fmass',['get_mass',['../class_solution.html#aa6824d341bfca36165cae6b230fce5a6',1,'Solution']]],
   ['get_5fnb_5fevolution_5fsteps',['get_nb_evolution_steps',['../class_set_up_params.html#add301b68cc4e7d5ae33d312c7615e026',1,'SetUpParams']]],

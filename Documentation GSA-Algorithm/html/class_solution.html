@@ -109,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0524895b67d4e1163597dbff219d4215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af588c6d5a52c61780d09080ec88be993"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#af588c6d5a52c61780d09080ec88be993">mass_calculation</a> (const <a class="el" href="class_solution.html">Solution</a> *minFit, const <a class="el" href="class_solution.html">Solution</a> *maxFit)</td></tr>
 <tr class="separator:af588c6d5a52c61780d09080ec88be993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6515a60215d2e94598c7138f08d1821"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#ab6515a60215d2e94598c7138f08d1821">inertia_mass_calculation</a> (double mass_sum)</td></tr>
+<tr class="separator:ab6515a60215d2e94598c7138f08d1821"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81010fb05be3317f2440a70272bfa583"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#a81010fb05be3317f2440a70272bfa583">acceleration_calculation</a> (std::vector&lt; <a class="el" href="class_solution.html">Solution</a> *&gt; &amp;v, double g)</td></tr>
 <tr class="separator:a81010fb05be3317f2440a70272bfa583"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f27a0d671c9a7af2dba5bedeb5f55bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#a0f27a0d671c9a7af2dba5bedeb5f55bc">update_solution</a> ()</td></tr>
@@ -127,6 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac432fffaa312cef4498a0b3140c3a72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6824d341bfca36165cae6b230fce5a6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#aa6824d341bfca36165cae6b230fce5a6">get_mass</a> () const</td></tr>
 <tr class="separator:aa6824d341bfca36165cae6b230fce5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1258863fad18c47eb21729f66d01d302"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#a1258863fad18c47eb21729f66d01d302">get_inertia_mass</a> () const</td></tr>
+<tr class="separator:a1258863fad18c47eb21729f66d01d302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affde1879bbd9b3173627998adeb0387c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#affde1879bbd9b3173627998adeb0387c">get_size</a> () const</td></tr>
 <tr class="separator:affde1879bbd9b3173627998adeb0387c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab06160809e68a292816a94707d47d77f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_solution.html#ab06160809e68a292816a94707d47d77f">get_position</a> (const int index) const</td></tr>
@@ -171,14 +175,6 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_solution_aafc8c4229306151e9a5402c04008cfb1_cgraph.png" border="0" usemap="#class_solution_aafc8c4229306151e9a5402c04008cfb1_cgraph" alt=""/></div>
-<map name="class_solution_aafc8c4229306151e9a5402c04008cfb1_cgraph" id="class_solution_aafc8c4229306151e9a5402c04008cfb1_cgraph">
-<area shape="rect" id="node2" href="class_problem.html#a8cf7cbe02db152e2d78f11fa3c34da68" title="Problem::get_dimension" alt="" coords="177,5,340,32"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -431,6 +427,29 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a1258863fad18c47eb21729f66d01d302"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1258863fad18c47eb21729f66d01d302">&#9670;&nbsp;</a></span>get_inertia_mass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Solution::get_inertia_mass </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Retourne la masse inertielle d'une solution </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">inertia_masse</td><td>- double </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa6824d341bfca36165cae6b230fce5a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6824d341bfca36165cae6b230fce5a6">&#9670;&nbsp;</a></span>get_mass()</h2>
 
@@ -544,6 +563,30 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>- int </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">vitesse</td><td>- double </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab6515a60215d2e94598c7138f08d1821"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6515a60215d2e94598c7138f08d1821">&#9670;&nbsp;</a></span>inertia_mass_calculation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solution::inertia_mass_calculation </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mass_sum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calcule la masse inertielle d'une planete en fonction de la masse totale de toutes les solutions </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mass_sum</td><td>- double </td></tr>
   </table>
   </dd>
 </dl>
@@ -813,8 +856,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/Olivier/Documents/GitHub/GSA-Algorithm/<a class="el" href="_solution_8h_source.html">Solution.h</a></li>
-<li>C:/Users/Olivier/Documents/GitHub/GSA-Algorithm/<a class="el" href="_solution_8cpp.html">Solution.cpp</a></li>
+<li>C:/Users/Olivier/Documents/GitHub/GSA-Algorithm/src/<a class="el" href="_solution_8h_source.html">Solution.h</a></li>
+<li>C:/Users/Olivier/Documents/GitHub/GSA-Algorithm/src/<a class="el" href="_solution_8cpp.html">Solution.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

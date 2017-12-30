@@ -64,6 +64,10 @@ void Solution::mass_calculation(const Solution *minFit, const Solution *maxFit)
     }
 }
 
+/**
+  Calcule la masse inertielle d'une planete en fonction de la masse totale de toutes les solutions
+	@param[in] mass_sum - double
+*/
 void Solution::inertia_mass_calculation(double mass_sum)
 {
     _inertia_mass = _mass / mass_sum;
@@ -252,6 +256,10 @@ double Solution::get_mass() const
     return _mass;
 }
 
+/**
+  Retourne la masse inertielle d'une solution
+  @param[out] inertia_masse - double
+*/
 double Solution::get_inertia_mass() const
 {
     return _inertia_mass;
